@@ -8,6 +8,7 @@ const toolRoutes = [
   "/tools/youtube-revenue-calculator",
   "/tools/sponsorship-rate-calculator"
 ];
+const coreRoutes = ["/"];
 const supportRoutes = ["/faq", "/blog", "/privacy-policy", "/terms", "/dmca"];
 
 function priorityForPath(path: string) {
@@ -40,6 +41,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const marketingPages = await listMarketingPagesForSeo();
   const blogPosts = await listBlogPostsForSeo();
   const routes = [
+    ...coreRoutes,
     ...marketingPages.map((page) => normalizePath(page.slug)),
     ...toolRoutes,
     ...supportRoutes,
