@@ -2,14 +2,8 @@ import type { MetadataRoute } from "next";
 import { listBlogPostsForSeo, listMarketingPagesForSeo } from "@/lib/seo/content";
 import { getSiteUrl, normalizePath } from "@/lib/seo/site";
 
-const supportRoutes = [
-  "/tools/tiktok-money-calculator",
-  "/faq",
-  "/blog",
-  "/privacy-policy",
-  "/terms",
-  "/dmca"
-];
+const toolRoutes = ["/tools/tiktok-money-calculator"];
+const supportRoutes = ["/faq", "/blog", "/privacy-policy", "/terms", "/dmca"];
 
 function priorityForPath(path: string) {
   if (path === "/") {
@@ -42,6 +36,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const blogPosts = await listBlogPostsForSeo();
   const routes = [
     ...marketingPages.map((page) => normalizePath(page.slug)),
+    ...toolRoutes,
     ...supportRoutes,
     ...blogPosts.map((post) => `/blog/${post.slug}`)
   ];

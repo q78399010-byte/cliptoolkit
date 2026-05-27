@@ -35,24 +35,51 @@ function formatNumber(value: number) {
   }).format(value);
 }
 
-function getGrowthSuggestion(engagementRate: number, postingFrequency: number, monthlyViews: number) {
+function getGrowthSuggestions(
+  rpm: number,
+  engagementRate: number,
+  postingFrequency: number,
+  monthlyViews: number
+) {
+  const suggestions: string[] = [];
+
+  if (rpm < 0.5) {
+    suggestions.push(
+      "RPM is low. Improve content focus around one niche, prioritize higher-value audience countries, and test videos long enough to qualify for stronger monetization signals."
+    );
+  }
+
+  if (engagementRate < 3) {
+    suggestions.push(
+      "Engagement is holding the estimate down. Rewrite the first three seconds, make the payoff clearer, and add a simple CTA that invites comments or saves."
+    );
+  }
+
+  if (postingFrequency < 3) {
+    suggestions.push(
+      "Posting frequency is below a stable testing cadence. Aim for at least 3 consistent posts per week before judging whether a format is working."
+    );
+  }
+
+  if (suggestions.length) {
+    return suggestions;
+  }
+
   if (monthlyViews < 100000) {
-    return "Focus on repeatable formats first. Publish enough test videos each week to identify hooks that can reliably pass 10,000 views.";
+    return [
+      "Focus on repeatable formats first. Publish enough test videos each week to identify hooks that can reliably pass 10,000 views."
+    ];
   }
 
-  if (engagementRate < 4) {
-    return "Your biggest upside is engagement. Strengthen the first three seconds, ask for comments naturally, and reuse topics that already hold attention.";
+  if (engagementRate >= 8 && postingFrequency >= 5 && rpm >= 1) {
+    return [
+      "You have strong monetization signals. Package your results into a simple media kit and test sponsor or UGC offers alongside platform revenue."
+    ];
   }
 
-  if (postingFrequency < 4) {
-    return "Your engagement is workable, but posting volume is limiting data. Move toward 4 to 7 posts per week before scaling brand outreach.";
-  }
-
-  if (engagementRate >= 8 && postingFrequency >= 5) {
-    return "You have strong monetization signals. Package your results into a simple media kit and test sponsor or UGC offers alongside platform revenue.";
-  }
-
-  return "Keep the cadence steady and improve one variable at a time: hook rate, retention, comment quality, or offer conversion.";
+  return [
+    "Keep the cadence steady and improve one variable at a time: hook rate, retention, comment quality, audience quality, or offer conversion."
+  ];
 }
 
 export function TikTokMoneyCalculator() {
@@ -76,7 +103,7 @@ export function TikTokMoneyCalculator() {
       low: adjustedEstimate * 0.65,
       medium: adjustedEstimate,
       high: adjustedEstimate * 1.55,
-      suggestion: getGrowthSuggestion(engagementRate, postingFrequency, monthlyViews),
+      suggestions: getGrowthSuggestions(rpm, engagementRate, postingFrequency, monthlyViews),
       viewsPerPost:
         postingFrequency > 0 ? monthlyViews / Math.max(1, postingFrequency * 4.33) : monthlyViews
     };
@@ -201,9 +228,15 @@ export function TikTokMoneyCalculator() {
 
       <div className="mt-6 rounded-lg border border-emerald-200 bg-emerald-50 p-5">
         <p className="text-sm font-bold uppercase tracking-[0.16em] text-emerald-700">
-          Growth suggestion
+          Creator Growth Suggestion
         </p>
-        <p className="mt-3 leading-7 text-slate-700">{result.suggestion}</p>
+        <div className="mt-3 grid gap-2">
+          {result.suggestions.map((suggestion) => (
+            <p key={suggestion} className="leading-7 text-slate-700">
+              {suggestion}
+            </p>
+          ))}
+        </div>
       </div>
 
       <p className="mt-5 text-xs leading-5 text-slate-500">
