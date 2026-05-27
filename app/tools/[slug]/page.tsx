@@ -3,12 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 const comingSoonTools = {
-  "ugc-rate-calculator": {
-    title: "UGC Rate Calculator",
-    description:
-      "Estimate UGC creator rates for brand videos, usage rights, revisions, and monthly content packages.",
-    category: "UGC Creator Tools"
-  },
   "youtube-revenue-calculator": {
     title: "YouTube Revenue Calculator",
     description:

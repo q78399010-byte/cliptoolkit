@@ -80,17 +80,20 @@ const internalToolLinks = [
   {
     title: "UGC Rate Calculator",
     href: "/tools/ugc-rate-calculator",
-    description: "Estimate UGC content rates, usage rights, revisions, and package pricing."
+    description: "Estimate UGC content rates, usage rights, revisions, and package pricing.",
+    status: "Live"
   },
   {
     title: "YouTube Revenue Calculator",
     href: "/tools/youtube-revenue-calculator",
-    description: "Model YouTube AdSense, Shorts revenue, sponsorships, and monthly channel income."
+    description: "Model YouTube AdSense, Shorts revenue, sponsorships, and monthly channel income.",
+    status: "Coming soon"
   },
   {
     title: "Sponsorship Rate Calculator",
     href: "/tools/sponsorship-rate-calculator",
-    description: "Price sponsored posts using views, engagement, niche, deliverables, and campaign value."
+    description: "Price sponsored posts using views, engagement, niche, deliverables, and campaign value.",
+    status: "Coming soon"
   }
 ];
 
@@ -455,7 +458,7 @@ export default function TikTokMoneyCalculatorPage() {
               className="rounded-lg border border-slate-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md"
             >
               <span className="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
-                Coming soon
+                {tool.status}
               </span>
               <h3 className="mt-4 text-xl font-bold tracking-normal">{tool.title}</h3>
               <p className="mt-3 text-sm leading-6 text-slate-600">{tool.description}</p>

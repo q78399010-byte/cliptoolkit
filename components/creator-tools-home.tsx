@@ -27,8 +27,8 @@ const featuredTools: Tool[] = [
     description: "Price brand collaborations",
     href: "/tools/ugc-rate-calculator",
     category: "UGC Pricing",
-    status: "Coming Soon",
-    cta: "Coming Soon"
+    status: "Live",
+    cta: "Try Calculator"
   },
   {
     title: "YouTube Revenue Calculator",
@@ -72,7 +72,7 @@ const categories = [
 ];
 
 const trustSignals = [
-  ["1 Live Creator Tool", "More tools launching weekly"],
+  ["2 Live Creator Tools", "More tools launching weekly"],
   ["4 Creator Categories", "TikTok, UGC, YouTube, Finance"],
   ["100% Free Access", "No signup required"],
   ["Creator-first Platform", "Built for independent creators"]
