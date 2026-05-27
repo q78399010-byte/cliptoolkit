@@ -2,7 +2,14 @@ import type { MetadataRoute } from "next";
 import { listBlogPostsForSeo, listMarketingPagesForSeo } from "@/lib/seo/content";
 import { getSiteUrl, normalizePath } from "@/lib/seo/site";
 
-const supportRoutes = ["/faq", "/blog", "/privacy-policy", "/terms", "/dmca"];
+const supportRoutes = [
+  "/tools/tiktok-money-calculator",
+  "/faq",
+  "/blog",
+  "/privacy-policy",
+  "/terms",
+  "/dmca"
+];
 
 function priorityForPath(path: string) {
   if (path === "/") {
@@ -11,6 +18,10 @@ function priorityForPath(path: string) {
 
   if (["/tiktok-downloader", "/instagram-reels-downloader"].includes(path)) {
     return 0.9;
+  }
+
+  if (path.startsWith("/tools/")) {
+    return 0.88;
   }
 
   if (path.startsWith("/blog")) {
