@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node --no-warnings=ExperimentalWarning node_modules/next/dist/bin/next dev",
-    "build": "node --no-warnings=ExperimentalWarning node_modules/next/dist/bin/next build",
-    "start": "node --no-warnings=ExperimentalWarning node_modules/next/dist/bin/next start",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
     "typecheck": "tsc --noEmit",
     "db:migrate": "node --no-warnings=ExperimentalWarning scripts/migrate.mjs",
     "db:seed": "node --no-warnings=ExperimentalWarning scripts/seed.mjs",
