@@ -2,7 +2,12 @@ import type { MetadataRoute } from "next";
 import { listBlogPostsForSeo, listMarketingPagesForSeo } from "@/lib/seo/content";
 import { getSiteUrl, normalizePath } from "@/lib/seo/site";
 
-const toolRoutes = ["/tools/tiktok-money-calculator"];
+const toolRoutes = [
+  "/tools/tiktok-money-calculator",
+  "/tools/ugc-rate-calculator",
+  "/tools/youtube-revenue-calculator",
+  "/tools/sponsorship-rate-calculator"
+];
 const supportRoutes = ["/faq", "/blog", "/privacy-policy", "/terms", "/dmca"];
 
 function priorityForPath(path: string) {

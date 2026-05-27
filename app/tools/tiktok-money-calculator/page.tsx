@@ -2,15 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { StructuredData } from "@/components/structured-data";
 import { TikTokMoneyCalculator } from "@/components/tiktok-money-calculator";
-import {
-  breadcrumbForPath,
-  createFaqSchema,
-  createWebPageSchema
-} from "@/lib/seo/schema";
+import { createFaqSchema } from "@/lib/seo/schema";
 
-const pagePath = "/tools/tiktok-money-calculator";
+const canonicalUrl = "https://www.cliptoolkit.com/tools/tiktok-money-calculator";
+const ogImageUrl = "https://www.cliptoolkit.com/og/tiktok-money-calculator.svg";
+const pageTitle = "TikTok Money Calculator (2026)  Estimate Creator Earnings Free";
 const pageDescription =
-  "Estimate TikTok monthly earnings with monthly views, RPM, engagement rate, and posting frequency. Includes low, medium, and high creator revenue ranges.";
+  "Free TikTok Money Calculator. Estimate creator earnings using views, RPM, engagement rate, and posting frequency. Built for creators, UGC creators, and TikTok Shop sellers.";
 
 const faqItems = [
   {
@@ -55,38 +53,117 @@ const rpmByNiche = [
 
 const recommendedTools = [
   {
-    title: "Video editing tool",
-    description: "Plan your production stack for faster hooks, captions, cuts, and export workflows.",
-    status: "Placeholder"
+    title: "CapCut Pro",
+    description: "Video editing for creators who need fast mobile edits, templates, captions, and social exports.",
+    focus: "Video editing for creators"
   },
   {
-    title: "Caption generator",
-    description: "Turn a rough topic into scroll-stopping caption angles and CTA variations.",
-    status: "Placeholder"
+    title: "Descript",
+    description: "AI editing and captions for creators turning scripts, podcasts, and interviews into polished clips.",
+    focus: "AI editing and captions"
   },
   {
-    title: "UGC rate calculator",
-    description: "Price brand deliverables, usage rights, revisions, and monthly content packages.",
-    status: "Coming soon"
+    title: "OpusClip",
+    description: "Turn long videos into shorts for TikTok, Reels, and YouTube Shorts distribution.",
+    focus: "Turn long videos into shorts"
+  }
+];
+
+const audienceCards = [
+  ["TikTok Creators", "Estimate creator income potential"],
+  ["UGC Creators", "Price brand collaborations better"],
+  ["TikTok Shop Sellers", "Forecast creator ROI"],
+  ["Creator Agencies", "Estimate creator campaign value"]
+];
+
+const internalToolLinks = [
+  {
+    title: "UGC Rate Calculator",
+    href: "/tools/ugc-rate-calculator",
+    description: "Estimate UGC content rates, usage rights, revisions, and package pricing."
+  },
+  {
+    title: "YouTube Revenue Calculator",
+    href: "/tools/youtube-revenue-calculator",
+    description: "Model YouTube AdSense, Shorts revenue, sponsorships, and monthly channel income."
+  },
+  {
+    title: "Sponsorship Rate Calculator",
+    href: "/tools/sponsorship-rate-calculator",
+    description: "Price sponsored posts using views, engagement, niche, deliverables, and campaign value."
   }
 ];
 
 export const metadata: Metadata = {
-  title: "TikTok Money Calculator - Estimate Creator Earnings",
-  description: pageDescription
+  title: pageTitle,
+  description: pageDescription,
+  keywords: [
+    "tiktok money calculator",
+    "tiktok earnings calculator",
+    "tiktok rpm calculator",
+    "creator income calculator",
+    "ugc creator calculator",
+    "tiktok revenue calculator"
+  ],
+  alternates: {
+    canonical: canonicalUrl
+  },
+  openGraph: {
+    title: pageTitle,
+    description: pageDescription,
+    url: canonicalUrl,
+    images: [
+      {
+        url: ogImageUrl,
+        width: 1200,
+        height: 630,
+        alt: "TikTok Money Calculator by ClipToolkit"
+      }
+    ]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitle,
+    description: pageDescription,
+    images: [ogImageUrl]
+  }
 };
 
 export default function TikTokMoneyCalculatorPage() {
+  const webPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: "TikTok Money Calculator",
+    description: pageDescription,
+    url: canonicalUrl,
+    isPartOf: {
+      "@type": "WebSite",
+      name: "ClipToolkit",
+      url: "https://www.cliptoolkit.com"
+    }
+  };
+  const softwareApplicationSchema = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "TikTok Money Calculator",
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    url: canonicalUrl,
+    description:
+      "Estimate TikTok creator income using RPM, views, engagement and posting cadence.",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD"
+    }
+  };
+
   return (
     <main className="min-h-screen bg-[#f7f9fc] text-slate-950">
       <StructuredData
         data={[
-          createWebPageSchema({
-            title: "TikTok Money Calculator",
-            description: pageDescription,
-            path: pagePath
-          }),
-          breadcrumbForPath("TikTok Money Calculator", pagePath),
+          webPageSchema,
+          softwareApplicationSchema,
           createFaqSchema(faqItems)
         ]}
       />
@@ -117,8 +194,12 @@ export default function TikTokMoneyCalculatorPage() {
               TikTok Money Calculator
             </h1>
             <p className="mt-5 text-lg leading-8 text-slate-600">
-              Estimate monthly TikTok earnings from views, RPM, engagement rate, and posting
-              frequency. Use the low, medium, and high ranges to plan realistic creator income.
+              Estimate how much TikTok creators can realistically earn from views, RPM,
+              engagement, and posting frequency.
+            </p>
+            <p className="mt-4 text-lg leading-8 text-slate-600">
+              Compare low, medium, and high earning scenarios to plan sponsorships, UGC pricing,
+              and creator growth.
             </p>
 
             <div className="mt-8 grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
@@ -136,6 +217,33 @@ export default function TikTokMoneyCalculatorPage() {
           </div>
 
           <TikTokMoneyCalculator />
+        </div>
+      </section>
+
+      <section className="border-t border-slate-200 bg-white">
+        <div className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-sm font-bold uppercase tracking-[0.18em] text-emerald-600">
+                Built for creator businesses
+              </p>
+              <h2 className="mt-2 text-2xl font-bold tracking-normal">
+                Who should use this calculator?
+              </h2>
+            </div>
+            <p className="max-w-xl text-sm leading-6 text-slate-600">
+              Use the estimate before pricing a campaign, setting a monthly revenue target, or
+              deciding whether a creator partnership is worth the spend.
+            </p>
+          </div>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {audienceCards.map(([title, body]) => (
+              <article key={title} className="rounded-lg border border-slate-200 bg-slate-50 p-5">
+                <h3 className="font-bold tracking-normal">{title}</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-600">{body}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -302,25 +410,57 @@ export default function TikTokMoneyCalculatorPage() {
                 Next steps
               </p>
               <h2 className="mt-2 text-2xl font-bold tracking-normal">
-                Recommended creator tools
+                Recommended creator stack
               </h2>
             </div>
             <p className="max-w-xl text-sm leading-6 text-slate-600">
-              Placeholder recommendations for future monetization, affiliate partnerships, or
-              internal tools.
+              A practical software stack for turning TikTok performance into better content,
+              cleaner production, and more reusable short-form assets.
             </p>
           </div>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {recommendedTools.map((tool) => (
               <article key={tool.title} className="rounded-lg border border-slate-200 bg-slate-50 p-5">
                 <span className="rounded-md bg-white px-2.5 py-1 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
-                  {tool.status}
+                  {tool.focus}
                 </span>
                 <h3 className="mt-4 text-xl font-bold tracking-normal">{tool.title}</h3>
                 <p className="mt-3 text-sm leading-6 text-slate-600">{tool.description}</p>
               </article>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-emerald-600">
+              Internal tools
+            </p>
+            <h2 className="mt-2 text-2xl font-bold tracking-normal">
+              Explore More Creator Tools
+            </h2>
+          </div>
+          <p className="max-w-xl text-sm leading-6 text-slate-600">
+            Keep planning creator revenue across UGC pricing, YouTube income, and sponsored content
+            campaigns.
+          </p>
+        </div>
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          {internalToolLinks.map((tool) => (
+            <Link
+              key={tool.href}
+              href={tool.href}
+              className="rounded-lg border border-slate-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md"
+            >
+              <span className="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
+                Coming soon
+              </span>
+              <h3 className="mt-4 text-xl font-bold tracking-normal">{tool.title}</h3>
+              <p className="mt-3 text-sm leading-6 text-slate-600">{tool.description}</p>
+            </Link>
+          ))}
         </div>
       </section>
 

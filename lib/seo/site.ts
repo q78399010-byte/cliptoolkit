@@ -1,5 +1,5 @@
 export function getSiteName() {
-  return process.env.NEXT_PUBLIC_SITE_NAME ?? "Creator Toolkit";
+  return process.env.NEXT_PUBLIC_SITE_NAME ?? "ClipToolkit";
 }
 
 function normalizeDomain(value: string) {
@@ -17,7 +17,7 @@ export function getSiteUrl() {
     return `https://${normalizeDomain(process.env.DOMAIN)}`;
   }
 
-  return "https://creator-toolkit.com";
+  return "https://www.cliptoolkit.com";
 }
 
 export function getCdnUrl() {
