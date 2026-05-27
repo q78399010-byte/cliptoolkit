@@ -1,33 +1,45 @@
 import type { MetadataRoute } from "next";
-import { programmaticSeoPages } from "@/lib/seo/programmatic-pages";
+import { listBlogPostsForSeo, listMarketingPagesForSeo } from "@/lib/seo/content";
+import { getSiteUrl, normalizePath } from "@/lib/seo/site";
 
-const staticRoutes = [
-  "",
-  "/tiktok-downloader",
-  "/instagram-reels-downloader",
-  "/faq",
-  "/blog",
-  "/privacy-policy",
-  "/terms",
-  "/dmca"
-];
+const supportRoutes = ["/faq", "/blog", "/privacy-policy", "/terms", "/dmca"];
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://creator-toolkit.com";
+function priorityForPath(path: string) {
+  if (path === "/") {
+    return 1;
+  }
+
+  if (["/tiktok-downloader", "/instagram-reels-downloader"].includes(path)) {
+    return 0.9;
+  }
+
+  if (path.startsWith("/blog")) {
+    return 0.68;
+  }
+
+  if (["/privacy-policy", "/terms", "/dmca"].includes(path)) {
+    return 0.32;
+  }
+
+  return 0.78;
+}
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const siteUrl = getSiteUrl();
   const now = new Date();
-
-  return [
-    ...staticRoutes.map((route) => ({
-      url: `${siteUrl}${route}`,
-      lastModified: now,
-      changeFrequency: "weekly" as const,
-      priority: route === "" ? 1 : 0.75
-    })),
-    ...programmaticSeoPages.map((page) => ({
-      url: `${siteUrl}/${page.slug}`,
-      lastModified: now,
-      changeFrequency: "weekly" as const,
-      priority: 0.72
-    }))
+  const marketingPages = await listMarketingPagesForSeo();
+  const blogPosts = await listBlogPostsForSeo();
+  const routes = [
+    ...marketingPages.map((page) => normalizePath(page.slug)),
+    ...supportRoutes,
+    ...blogPosts.map((post) => `/blog/${post.slug}`)
   ];
+  const uniqueRoutes = Array.from(new Set(routes));
+
+  return uniqueRoutes.map((route) => ({
+      url: route === "/" ? `${siteUrl}/` : `${siteUrl}${route}`,
+      lastModified: now,
+      changeFrequency: route.startsWith("/blog") ? "monthly" : "weekly",
+      priority: priorityForPath(route)
+  }));
 }

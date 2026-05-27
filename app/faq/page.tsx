@@ -1,12 +1,17 @@
 import type { Metadata } from "next";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { StructuredData } from "@/components/structured-data";
+import { createPageMetadata } from "@/lib/seo/metadata";
+import { breadcrumbForPath, createFaqSchema, createWebPageSchema } from "@/lib/seo/schema";
 
-export const metadata: Metadata = {
-  title: "FAQ",
-  description: "Frequently asked questions about Creator Toolkit video downloads.",
-  alternates: { canonical: "/faq" }
-};
+export async function generateMetadata(): Promise<Metadata> {
+  return createPageMetadata({
+    title: "FAQ",
+    description: "Frequently asked questions about Creator Toolkit video downloads.",
+    path: "/faq"
+  });
+}
 
 const faqs = [
   {
@@ -28,6 +33,17 @@ const faqs = [
 export default function FaqPage() {
   return (
     <main>
+      <StructuredData
+        data={[
+          createWebPageSchema({
+            title: "Questions before launch",
+            description: "Frequently asked questions about Creator Toolkit video downloads.",
+            path: "/faq"
+          }),
+          breadcrumbForPath("FAQ", "/faq"),
+          createFaqSchema(faqs)
+        ]}
+      />
       <SiteHeader />
       <section className="shell py-14 sm:py-20">
         <p className="text-sm font-semibold uppercase text-mint">FAQ</p>

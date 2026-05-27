@@ -1,8 +1,13 @@
 import type { Metadata, Viewport } from "next";
+import { AnalyticsTracker } from "@/components/analytics-tracker";
+import { GoogleAnalytics } from "@/components/google-analytics";
+import { getSiteName, getSiteUrl } from "@/lib/seo/site";
 import "./globals.css";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://creator-toolkit.com";
-const siteName = process.env.NEXT_PUBLIC_SITE_NAME ?? "Creator Toolkit";
+const siteUrl = getSiteUrl();
+const siteName = getSiteName();
+const googleSiteVerification =
+  process.env.GOOGLE_SITE_VERIFICATION ?? process.env.GOOGLE_SEARCH_CONSOLE_VERIFICATION;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -25,7 +30,12 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Download TikTok & Instagram Videos Without Watermark",
     description: "Fast, Free, HD Quality."
-  }
+  },
+  verification: googleSiteVerification
+    ? {
+        google: googleSiteVerification
+      }
+    : undefined
 };
 
 export const viewport: Viewport = {
@@ -42,7 +52,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <GoogleAnalytics />
+        <AnalyticsTracker />
+        {children}
+      </body>
     </html>
   );
 }

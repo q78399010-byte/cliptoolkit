@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import { LandingPage } from "@/components/landing-page";
-import { homePage } from "@/lib/seo/pages";
+import { getMarketingPageBySlug } from "@/lib/seo/content";
 
-export const metadata: Metadata = homePage.metadata;
+export async function generateMetadata(): Promise<Metadata> {
+  const page = await getMarketingPageBySlug("home");
+  return page?.metadata ?? {};
+}
 
-export default function HomePage() {
-  return <LandingPage page={homePage} />;
+export default async function HomePage() {
+  const page = await getMarketingPageBySlug("home");
+  return page ? <LandingPage page={page} /> : null;
 }

@@ -1,24 +1,38 @@
 import type { SupportedPlatform } from "@/lib/platform";
 
-export type ProviderAssetType = "video" | "cover" | "audio";
+export type ProviderStatus = "success" | "failed";
 
-export type ProviderAsset = {
-  type: ProviderAssetType;
+export type ProviderErrorCode =
+  | "UNSUPPORTED_URL"
+  | "INVALID_URL"
+  | "NOT_FOUND"
+  | "TIMEOUT"
+  | "PROVIDER_DOWN"
+  | "PARSE_FAILED"
+  | "NO_DOWNLOAD_URL";
+
+export type DownloadUrl = {
   url: string;
-  format: "mp4" | "jpg" | "webp" | "mp3";
+  type: "video" | "audio";
   quality?: string;
-  filesize?: number;
+  format?: string;
+  label?: string;
 };
 
 export type ProviderAnalyzeResult = {
+  title: string | null;
+  thumbnail: string | null;
+  duration: number | null;
+  downloadUrls: DownloadUrl[];
+  audioUrl: string | null;
   platform: SupportedPlatform;
+  status: ProviderStatus;
+  error?: string;
+  errorCode?: ProviderErrorCode;
   sourceUrl: string;
   normalizedUrl: string;
-  title?: string;
-  duration?: number;
-  thumbnailUrl?: string;
-  assets: ProviderAsset[];
   providerKey: string;
+  cacheHit?: boolean;
 };
 
 export type ProviderContext = {
@@ -31,5 +45,6 @@ export interface DownloadProvider {
   platform: SupportedPlatform;
   canHandle(url: string): boolean;
   normalizeUrl(url: string): string;
-  analyze(url: string, context: ProviderContext): Promise<ProviderAnalyzeResult>;
+  analyze(url: string, context?: Partial<ProviderContext>): Promise<ProviderAnalyzeResult>;
+  download(url: string, context?: Partial<ProviderContext>): Promise<ProviderAnalyzeResult>;
 }

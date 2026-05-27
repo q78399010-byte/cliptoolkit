@@ -3,29 +3,38 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+      args:
+        DOMAIN: ${DOMAIN:-}
+        SITE_URL: ${SITE_URL:-}
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-}
+        NEXT_PUBLIC_SITE_NAME: ${NEXT_PUBLIC_SITE_NAME:-}
+        CDN_URL: ${CDN_URL:-}
+        GOOGLE_SITE_VERIFICATION: ${GOOGLE_SITE_VERIFICATION:-}
+        GOOGLE_SEARCH_CONSOLE_VERIFICATION: ${GOOGLE_SEARCH_CONSOLE_VERIFICATION:-}
+        NEXT_PUBLIC_GA_MEASUREMENT_ID: ${NEXT_PUBLIC_GA_MEASUREMENT_ID:-}
+        LEGAL_CONTACT_EMAIL: ${LEGAL_CONTACT_EMAIL:-}
     env_file:
-      - .env
+      - .env.local
+    environment:
+      DB_PROVIDER: postgres
+      CACHE_DRIVER: memory
     ports:
       - "3000:3000"
     depends_on:
       postgres:
         condition: service_healthy
-      redis:
-        condition: service_healthy
     restart: unless-stopped
 
   postgres:
     image: postgres:16-alpine
-    environment:
-      POSTGRES_USER: creator_toolkit
-      POSTGRES_PASSWORD: creator_toolkit
-      POSTGRES_DB: creator_toolkit
+    env_file:
+      - .env.local
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U creator_toolkit -d creator_toolkit"]
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -33,6 +42,8 @@ services:
 
   redis:
     image: redis:7-alpine
+    profiles:
+      - cache
     command: ["redis-server", "--appendonly", "yes"]
     ports:
       - "6379:6379"

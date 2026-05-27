@@ -3,6 +3,7 @@ node_modules
 dist
 coverage
 .env
+.env.production
 .env.local
 .env.*.local
 npm-debug.log*
@@ -12,3 +13,5 @@ pnpm-debug.log*
 *.tsbuildinfo
 Dockerfile.local
 .next-*.log
+data/*.sqlite
+data/*.sqlite-*
