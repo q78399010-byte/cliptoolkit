@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { RoiCurrencyLink } from "@/components/roi-currency-link";
 import { StructuredData } from "@/components/structured-data";
 import { TikTokShopRoiCalculator } from "@/components/tiktok-shop-roi-calculator";
 import {
@@ -139,17 +140,12 @@ export function TikTokShopRoiPageContent({ market }: { market: RoiMarket }) {
 
             <div className="mt-6 flex flex-wrap gap-2">
               {Object.values(roiMarkets).map((item) => (
-                <Link
+                <RoiCurrencyLink
                   key={item.currency}
                   href={currencyHref(item)}
-                  className={
-                    item.currency === market.currency
-                      ? "rounded-md bg-slate-950 px-3 py-2 text-sm font-bold text-white"
-                      : "rounded-md border border-slate-200 bg-white px-3 py-2 text-sm font-bold text-slate-700 transition hover:border-slate-300"
-                  }
-                >
-                  {item.currencyCode}
-                </Link>
+                  active={item.currency === market.currency}
+                  currencyCode={item.currencyCode}
+                />
               ))}
             </div>
 

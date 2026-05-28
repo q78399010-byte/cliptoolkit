@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { trackGaEvent } from "@/components/google-analytics";
 import type { RoiMarket } from "@/lib/tiktok-shop-roi";
 
 type CostModel = "cpm" | "cpc";
@@ -444,6 +445,12 @@ export function TikTokShopRoiCalculator({ market }: { market: RoiMarket }) {
   }
 
   function handleLoadTemplate(template: IndustryTemplate) {
+    trackGaEvent("industry_template_apply", {
+      currency: market.currencyCode,
+      industry_template: template.name,
+      scenario: activeScenario
+    });
+
     setScenarios((current) => ({
       ...current,
       [activeScenario]: {
@@ -475,6 +482,18 @@ export function TikTokShopRoiCalculator({ market }: { market: RoiMarket }) {
     return highlightedTemplateFields.includes(field);
   }
 
+  function handleCompareToggle() {
+    const nextEnabled = !compareEnabled;
+
+    trackGaEvent("ab_toggle", {
+      currency: market.currencyCode,
+      enabled: nextEnabled,
+      scenario: activeScenario
+    });
+
+    setCompareEnabled(nextEnabled);
+  }
+
   function handleCalculate() {
     setStatusMessage("ROI updated from the current inputs. Results refresh automatically as you edit.");
   }
@@ -489,6 +508,12 @@ export function TikTokShopRoiCalculator({ market }: { market: RoiMarket }) {
   }
 
   function handlePersonalizedAdvice() {
+    trackGaEvent("get_personalized_advice", {
+      currency: market.currencyCode,
+      has_email: email.includes("@"),
+      scenario: activeScenario
+    });
+
     if (!email.includes("@")) {
       setStatusMessage("Enter an email address first so the advice request can include your report.");
       return;
@@ -509,6 +534,12 @@ export function TikTokShopRoiCalculator({ market }: { market: RoiMarket }) {
   }
 
   function handleExportPdf() {
+    trackGaEvent("export_pdf", {
+      currency: market.currencyCode,
+      has_email: email.includes("@"),
+      scenario: activeScenario
+    });
+
     if (!email.includes("@")) {
       setStatusMessage("Enter an email address to unlock the PDF export.");
       return;
@@ -616,7 +647,7 @@ export function TikTokShopRoiCalculator({ market }: { market: RoiMarket }) {
         </div>
         <button
           type="button"
-          onClick={() => setCompareEnabled((current) => !current)}
+          onClick={handleCompareToggle}
           className={
             compareEnabled
               ? "min-h-10 rounded-md bg-emerald-600 px-4 text-sm font-bold text-white"
