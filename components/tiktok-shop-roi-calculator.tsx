@@ -577,7 +577,7 @@ export function TikTokShopRoiCalculator({ market }: { market: RoiMarket }) {
 
   return (
     <section
-      className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm sm:p-6"
+      className="rounded-lg border border-slate-200 bg-white p-5 shadow-[0_18px_55px_rgba(15,23,42,0.08)] sm:p-6 xl:p-7"
       aria-labelledby="roi-calculator-title"
     >
       <div className="flex flex-col gap-3 border-b border-slate-200 pb-5 sm:flex-row sm:items-start sm:justify-between">
@@ -679,198 +679,265 @@ export function TikTokShopRoiCalculator({ market }: { market: RoiMarket }) {
         </div>
       </div>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2">
-        <label className="grid gap-2">
-          <span className="text-sm font-bold text-slate-700">Product price per unit</span>
-          <input
-            inputMode="decimal"
-            value={activeInputs.productPrice}
-            onChange={(event) => updateScenario("productPrice", event.target.value)}
-            className="min-h-12 rounded-md border border-slate-200 bg-slate-50 px-4 text-base text-slate-950 outline-none transition focus:border-emerald-300 focus:bg-white focus:ring-4 focus:ring-emerald-100"
-          />
-        </label>
-
-        <label className="grid gap-2">
-          <span className="text-sm font-bold text-slate-700">Conversion Rate (CVR %)</span>
-          <input
-            inputMode="decimal"
-            value={activeInputs.conversionRate}
-            onChange={(event) => updateScenario("conversionRate", event.target.value)}
-            className={fieldInputClass(isTemplateFieldHighlighted("conversionRate"))}
-          />
-        </label>
-
-        <label className="grid gap-2 sm:col-span-2">
-          <span className="flex items-center justify-between gap-3 text-sm font-bold text-slate-700">
-            <span>Traffic / Impressions</span>
-            <span className="text-slate-500">{plainNumber(numberFromInput(activeInputs.traffic))}</span>
-          </span>
-          <input
-            type="range"
-            min="1000"
-            max="1000000"
-            step="1000"
-            value={numberFromInput(activeInputs.traffic)}
-            onChange={(event) => updateScenario("traffic", event.target.value)}
-            className="accent-emerald-600"
-          />
-          <input
-            inputMode="numeric"
-            value={activeInputs.traffic}
-            onChange={(event) => updateScenario("traffic", event.target.value)}
-            className="min-h-12 rounded-md border border-slate-200 bg-slate-50 px-4 text-base text-slate-950 outline-none transition focus:border-emerald-300 focus:bg-white focus:ring-4 focus:ring-emerald-100"
-          />
-        </label>
-
-        <label className="grid gap-2 sm:col-span-2">
-          <span className="flex items-center justify-between gap-3 text-sm font-bold text-slate-700">
-            <span>Ad spend (TikTok Ads)</span>
-            <span className="text-slate-500">{money.format(numberFromInput(activeInputs.adSpend))}</span>
-          </span>
-          <input
-            type="range"
-            min="0"
-            max="50000"
-            step="100"
-            value={numberFromInput(activeInputs.adSpend)}
-            onChange={(event) => updateScenario("adSpend", event.target.value)}
-            className="accent-emerald-600"
-          />
-          <input
-            inputMode="decimal"
-            value={activeInputs.adSpend}
-            onChange={(event) => updateScenario("adSpend", event.target.value)}
-            className="min-h-12 rounded-md border border-slate-200 bg-slate-50 px-4 text-base text-slate-950 outline-none transition focus:border-emerald-300 focus:bg-white focus:ring-4 focus:ring-emerald-100"
-          />
-        </label>
-
-        <label className="grid gap-2">
-          <span className="text-sm font-bold text-slate-700">CPM / CPC</span>
-          <div className="grid grid-cols-[0.8fr_1fr] gap-2">
-            <select
-              value={activeInputs.costModel}
-              onChange={(event) => updateScenario("costModel", event.target.value as CostModel)}
-              className={fieldInputClass(isTemplateFieldHighlighted("costModel"))}
-            >
-              <option value="cpm">CPM</option>
-              <option value="cpc">CPC</option>
-            </select>
-            <input
-              inputMode="decimal"
-              value={activeInputs.adRate}
-              onChange={(event) => updateScenario("adRate", event.target.value)}
-              className={fieldInputClass(isTemplateFieldHighlighted("adRate"))}
-            />
-          </div>
-        </label>
-
-        <label className="grid gap-2">
-          <span className="text-sm font-bold text-slate-700">Platform commission (%)</span>
-          <input
-            inputMode="decimal"
-            value={activeInputs.commissionRate}
-            onChange={(event) => updateScenario("commissionRate", event.target.value)}
-            className={fieldInputClass(isTemplateFieldHighlighted("commissionRate"))}
-          />
-        </label>
-
-        <label className="grid gap-2">
-          <span className="text-sm font-bold text-slate-700">Shipping cost per unit</span>
-          <input
-            inputMode="decimal"
-            value={activeInputs.shippingCost}
-            onChange={(event) => updateScenario("shippingCost", event.target.value)}
-            className="min-h-12 rounded-md border border-slate-200 bg-slate-50 px-4 text-base text-slate-950 outline-none transition focus:border-emerald-300 focus:bg-white focus:ring-4 focus:ring-emerald-100"
-          />
-        </label>
-
-        <label className="grid gap-2">
-          <span className="text-sm font-bold text-slate-700">Return rate (%)</span>
-          <input
-            inputMode="decimal"
-            value={activeInputs.returnRate}
-            onChange={(event) => updateScenario("returnRate", event.target.value)}
-            className={fieldInputClass(isTemplateFieldHighlighted("returnRate"))}
-          />
-        </label>
-
-        <label className="grid gap-2 sm:col-span-2">
-          <span className="text-sm font-bold text-slate-700">Miscellaneous costs</span>
-          <input
-            inputMode="decimal"
-            value={activeInputs.miscCosts}
-            onChange={(event) => updateScenario("miscCosts", event.target.value)}
-            className="min-h-12 rounded-md border border-slate-200 bg-slate-50 px-4 text-base text-slate-950 outline-none transition focus:border-emerald-300 focus:bg-white focus:ring-4 focus:ring-emerald-100"
-          />
-        </label>
-      </div>
-
-      <div className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
-        {[
-          ["Total Revenue", money.format(activeMetrics.totalRevenue)],
-          ["Total Cost", money.format(activeMetrics.totalCost)],
-          ["Net Profit", money.format(activeMetrics.netProfit)],
-          ["ROI", percent(activeMetrics.roi)],
-          ["ROAS", activeMetrics.roas === null ? "N/A" : percent(activeMetrics.roas)]
-        ].map(([label, value]) => (
-          <div key={label} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
-            <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">{label}</p>
-            <p
-              className={
-                label === "Net Profit" && activeMetrics.netProfit < 0
-                  ? "mt-2 text-2xl font-black tracking-normal text-red-700"
-                  : "mt-2 text-2xl font-black tracking-normal text-slate-950"
-              }
-            >
-              {value}
-            </p>
-          </div>
-        ))}
-      </div>
-
-      <div
-        className={`mt-4 rounded-lg border p-5 ${diagnosisStyle.border} ${diagnosisStyle.background}`}
-      >
-        <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-          <div>
-            <p
-              className={`inline-flex rounded-md px-2.5 py-1 text-xs font-bold uppercase tracking-[0.12em] ${diagnosisStyle.badge}`}
-            >
-              Campaign Diagnosis
-            </p>
-            <h3 className={`mt-3 text-xl font-bold tracking-normal ${diagnosisStyle.title}`}>
-              {diagnosis.title}
-            </h3>
-          </div>
-          <p className="max-w-xl text-sm leading-6 text-slate-600">{diagnosis.message}</p>
-        </div>
-        <div className="mt-4 grid gap-2 sm:grid-cols-2">
-          {diagnosis.suggestions.map((suggestion) => (
-            <div
-              key={suggestion}
-              className="rounded-md border border-white/60 bg-white/80 px-4 py-3 text-sm font-medium text-slate-700 shadow-sm"
-            >
-              {suggestion}
+      <div className="mt-6 grid gap-6 xl:grid-cols-[minmax(0,0.95fr)_minmax(360px,0.78fr)] xl:items-start">
+        <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm sm:p-5">
+          <div className="flex flex-col gap-1 border-b border-slate-200 pb-4 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">
+                Campaign assumptions
+              </p>
+              <h3 className="mt-1 text-lg font-bold tracking-normal text-slate-950">
+                Input model
+              </h3>
             </div>
-          ))}
-        </div>
-      </div>
+            <p className="text-sm leading-6 text-slate-500">Scenario {activeScenario}</p>
+          </div>
 
-      <div className="mt-4 grid gap-3 sm:grid-cols-2">
-        <RevenueCostChart metrics={activeMetrics} money={money} />
-        <div className="rounded-lg border border-slate-200 bg-white p-4">
-          <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">
-            Order economics
-          </p>
-          <div className="mt-4 grid gap-2 text-sm text-slate-600">
-            <p>Orders: <strong className="text-slate-950">{plainNumber(activeMetrics.orders)}</strong></p>
-            <p>Net orders after returns: <strong className="text-slate-950">{plainNumber(activeMetrics.netOrders)}</strong></p>
-            <p>Commission cost: <strong className="text-slate-950">{money.format(activeMetrics.commissionCost)}</strong></p>
-            <p>Shipping cost: <strong className="text-slate-950">{money.format(activeMetrics.shippingCost)}</strong></p>
-            <p>
-              {activeInputs.costModel.toUpperCase()} benchmark cost:{" "}
-              <strong className="text-slate-950">{money.format(activeMetrics.benchmarkAdCost)}</strong>
-            </p>
+          <div className="mt-5 grid gap-4 sm:grid-cols-2">
+            <label className="grid gap-2">
+              <span className="text-sm font-bold text-slate-700">Product price per unit</span>
+              <input
+                inputMode="decimal"
+                value={activeInputs.productPrice}
+                onChange={(event) => updateScenario("productPrice", event.target.value)}
+                className="min-h-12 rounded-md border border-slate-200 bg-slate-50 px-4 text-base text-slate-950 outline-none transition focus:border-emerald-300 focus:bg-white focus:ring-4 focus:ring-emerald-100"
+              />
+            </label>
+
+            <label className="grid gap-2">
+              <span className="text-sm font-bold text-slate-700">Conversion Rate (CVR %)</span>
+              <input
+                inputMode="decimal"
+                value={activeInputs.conversionRate}
+                onChange={(event) => updateScenario("conversionRate", event.target.value)}
+                className={fieldInputClass(isTemplateFieldHighlighted("conversionRate"))}
+              />
+            </label>
+
+            <label className="grid gap-2 sm:col-span-2">
+              <span className="flex items-center justify-between gap-3 text-sm font-bold text-slate-700">
+                <span>Traffic / Impressions</span>
+                <span className="text-slate-500">
+                  {plainNumber(numberFromInput(activeInputs.traffic))}
+                </span>
+              </span>
+              <input
+                type="range"
+                min="1000"
+                max="1000000"
+                step="1000"
+                value={numberFromInput(activeInputs.traffic)}
+                onChange={(event) => updateScenario("traffic", event.target.value)}
+                className="accent-emerald-600"
+              />
+              <input
+                inputMode="numeric"
+                value={activeInputs.traffic}
+                onChange={(event) => updateScenario("traffic", event.target.value)}
+                className="min-h-12 rounded-md border border-slate-200 bg-slate-50 px-4 text-base text-slate-950 outline-none transition focus:border-emerald-300 focus:bg-white focus:ring-4 focus:ring-emerald-100"
+              />
+            </label>
+
+            <label className="grid gap-2 sm:col-span-2">
+              <span className="flex items-center justify-between gap-3 text-sm font-bold text-slate-700">
+                <span>Ad spend (TikTok Ads)</span>
+                <span className="text-slate-500">
+                  {money.format(numberFromInput(activeInputs.adSpend))}
+                </span>
+              </span>
+              <input
+                type="range"
+                min="0"
+                max="50000"
+                step="100"
+                value={numberFromInput(activeInputs.adSpend)}
+                onChange={(event) => updateScenario("adSpend", event.target.value)}
+                className="accent-emerald-600"
+              />
+              <input
+                inputMode="decimal"
+                value={activeInputs.adSpend}
+                onChange={(event) => updateScenario("adSpend", event.target.value)}
+                className="min-h-12 rounded-md border border-slate-200 bg-slate-50 px-4 text-base text-slate-950 outline-none transition focus:border-emerald-300 focus:bg-white focus:ring-4 focus:ring-emerald-100"
+              />
+            </label>
+
+            <label className="grid gap-2">
+              <span className="text-sm font-bold text-slate-700">CPM / CPC</span>
+              <div className="grid grid-cols-[0.8fr_1fr] gap-2">
+                <select
+                  value={activeInputs.costModel}
+                  onChange={(event) => updateScenario("costModel", event.target.value as CostModel)}
+                  className={fieldInputClass(isTemplateFieldHighlighted("costModel"))}
+                >
+                  <option value="cpm">CPM</option>
+                  <option value="cpc">CPC</option>
+                </select>
+                <input
+                  inputMode="decimal"
+                  value={activeInputs.adRate}
+                  onChange={(event) => updateScenario("adRate", event.target.value)}
+                  className={fieldInputClass(isTemplateFieldHighlighted("adRate"))}
+                />
+              </div>
+            </label>
+
+            <label className="grid gap-2">
+              <span className="text-sm font-bold text-slate-700">Platform commission (%)</span>
+              <input
+                inputMode="decimal"
+                value={activeInputs.commissionRate}
+                onChange={(event) => updateScenario("commissionRate", event.target.value)}
+                className={fieldInputClass(isTemplateFieldHighlighted("commissionRate"))}
+              />
+            </label>
+
+            <label className="grid gap-2">
+              <span className="text-sm font-bold text-slate-700">Shipping cost per unit</span>
+              <input
+                inputMode="decimal"
+                value={activeInputs.shippingCost}
+                onChange={(event) => updateScenario("shippingCost", event.target.value)}
+                className="min-h-12 rounded-md border border-slate-200 bg-slate-50 px-4 text-base text-slate-950 outline-none transition focus:border-emerald-300 focus:bg-white focus:ring-4 focus:ring-emerald-100"
+              />
+            </label>
+
+            <label className="grid gap-2">
+              <span className="text-sm font-bold text-slate-700">Return rate (%)</span>
+              <input
+                inputMode="decimal"
+                value={activeInputs.returnRate}
+                onChange={(event) => updateScenario("returnRate", event.target.value)}
+                className={fieldInputClass(isTemplateFieldHighlighted("returnRate"))}
+              />
+            </label>
+
+            <label className="grid gap-2 sm:col-span-2">
+              <span className="text-sm font-bold text-slate-700">Miscellaneous costs</span>
+              <input
+                inputMode="decimal"
+                value={activeInputs.miscCosts}
+                onChange={(event) => updateScenario("miscCosts", event.target.value)}
+                className="min-h-12 rounded-md border border-slate-200 bg-slate-50 px-4 text-base text-slate-950 outline-none transition focus:border-emerald-300 focus:bg-white focus:ring-4 focus:ring-emerald-100"
+              />
+            </label>
+          </div>
+        </div>
+
+        <div className="grid gap-4 xl:sticky xl:top-6">
+          <div className="rounded-lg border border-slate-900 bg-slate-950 p-5 text-white shadow-[0_18px_45px_rgba(15,23,42,0.18)]">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-300">
+                  Results dashboard
+                </p>
+                <h3 className="mt-2 text-xl font-bold tracking-normal">Profit and efficiency</h3>
+              </div>
+              <div className="rounded-md border border-white/10 bg-white/10 px-3 py-2 text-left sm:text-right">
+                <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-300">
+                  Active scenario
+                </p>
+                <p className="mt-1 text-sm font-black">Scenario {activeScenario}</p>
+              </div>
+            </div>
+            <div className="mt-6">
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-400">
+                Net profit
+              </p>
+              <p
+                className={
+                  activeMetrics.netProfit < 0
+                    ? "mt-2 break-words text-4xl font-black tracking-normal text-rose-300 sm:text-5xl xl:text-4xl 2xl:text-5xl"
+                    : "mt-2 break-words text-4xl font-black tracking-normal text-white sm:text-5xl xl:text-4xl 2xl:text-5xl"
+                }
+              >
+                {money.format(activeMetrics.netProfit)}
+              </p>
+            </div>
+            <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-2">
+              {[
+                ["Total Revenue", money.format(activeMetrics.totalRevenue)],
+                ["Total Cost", money.format(activeMetrics.totalCost)],
+                ["ROI", percent(activeMetrics.roi)],
+                ["ROAS", activeMetrics.roas === null ? "N/A" : percent(activeMetrics.roas)]
+              ].map(([label, value]) => (
+                <div key={label} className="rounded-lg border border-white/10 bg-white/[0.07] p-3">
+                  <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-400">
+                    {label}
+                  </p>
+                  <p className="mt-2 break-words text-xl font-black tracking-normal text-white">
+                    {value}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div
+            className={`rounded-lg border p-5 ${diagnosisStyle.border} ${diagnosisStyle.background}`}
+          >
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+              <div>
+                <p
+                  className={`inline-flex rounded-md px-2.5 py-1 text-xs font-bold uppercase tracking-[0.12em] ${diagnosisStyle.badge}`}
+                >
+                  Campaign Diagnosis
+                </p>
+                <h3 className={`mt-3 text-xl font-bold tracking-normal ${diagnosisStyle.title}`}>
+                  {diagnosis.title}
+                </h3>
+              </div>
+              <p className="max-w-xl text-sm leading-6 text-slate-600">{diagnosis.message}</p>
+            </div>
+            <div className="mt-4 grid gap-2 sm:grid-cols-2">
+              {diagnosis.suggestions.map((suggestion) => (
+                <div
+                  key={suggestion}
+                  className="rounded-md border border-white/60 bg-white/80 px-4 py-3 text-sm font-medium text-slate-700 shadow-sm"
+                >
+                  {suggestion}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid gap-3 lg:grid-cols-2 xl:grid-cols-1">
+            <RevenueCostChart metrics={activeMetrics} money={money} />
+            <div className="rounded-lg border border-slate-200 bg-white p-4">
+              <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">
+                Order economics
+              </p>
+              <div className="mt-4 grid gap-2 text-sm text-slate-600">
+                <p>
+                  Orders:{" "}
+                  <strong className="text-slate-950">{plainNumber(activeMetrics.orders)}</strong>
+                </p>
+                <p>
+                  Net orders after returns:{" "}
+                  <strong className="text-slate-950">
+                    {plainNumber(activeMetrics.netOrders)}
+                  </strong>
+                </p>
+                <p>
+                  Commission cost:{" "}
+                  <strong className="text-slate-950">
+                    {money.format(activeMetrics.commissionCost)}
+                  </strong>
+                </p>
+                <p>
+                  Shipping cost:{" "}
+                  <strong className="text-slate-950">
+                    {money.format(activeMetrics.shippingCost)}
+                  </strong>
+                </p>
+                <p>
+                  {activeInputs.costModel.toUpperCase()} benchmark cost:{" "}
+                  <strong className="text-slate-950">
+                    {money.format(activeMetrics.benchmarkAdCost)}
+                  </strong>
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

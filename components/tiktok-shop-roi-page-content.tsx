@@ -103,7 +103,7 @@ export function TikTokShopRoiPageContent({ market }: { market: RoiMarket }) {
         data={[webPageSchema, softwareApplicationSchema, createFaqSchema(tiktokShopRoiFaqItems)]}
       />
       <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between px-4 sm:px-6">
+        <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6 xl:max-w-[1400px]">
           <Link href="/" className="flex items-center gap-3 font-semibold">
             <span className="flex h-9 w-9 items-center justify-center rounded-md bg-slate-950 text-sm font-black text-white">
               C
@@ -119,21 +119,21 @@ export function TikTokShopRoiPageContent({ market }: { market: RoiMarket }) {
         </div>
       </header>
 
-      <section className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <div>
+      <section className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 sm:py-14 xl:max-w-[1400px]">
+        <div className="grid gap-6 lg:grid-cols-[minmax(260px,0.42fr)_minmax(0,1fr)] lg:items-start xl:grid-cols-[320px_minmax(0,1fr)] xl:gap-8">
+          <div className="lg:sticky lg:top-6 lg:self-start">
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-emerald-600">
               TIKTOK SHOP TOOLS
             </p>
-            <h1 className="mt-4 text-4xl font-bold leading-tight tracking-normal text-slate-950 sm:text-5xl">
+            <h1 className="mt-4 max-w-4xl text-4xl font-bold leading-tight tracking-normal text-slate-950 sm:text-5xl lg:text-4xl xl:text-[2.8rem]">
               TikTok Shop ROI Calculator
             </h1>
-            <p className="mt-5 text-lg leading-8 text-slate-600">
+            <p className="mt-5 text-lg leading-8 text-slate-600 lg:text-base lg:leading-7 xl:text-lg xl:leading-8">
               Estimate revenue, total cost, net profit, ROI, and ROAS for TikTok Shop campaigns.
               Compare A/B scenarios and see how ad spend, CVR, returns, commission, and shipping
               affect profit.
             </p>
-            <p className="mt-4 text-lg leading-8 text-slate-600">
+            <p className="mt-4 text-lg leading-8 text-slate-600 lg:text-base lg:leading-7 xl:text-lg xl:leading-8">
               Current version: {market.label} planning model in {market.currencyCode}.
             </p>
 
@@ -159,7 +159,7 @@ export function TikTokShopRoiPageContent({ market }: { market: RoiMarket }) {
                 ["A/B scenarios", "Compare two campaign assumptions before scaling budget."],
                 ["Exportable report", "Add your email and export a printable PDF report for planning."]
               ].map(([title, body]) => (
-                <article key={title} className="rounded-lg border border-slate-200 bg-white p-4">
+                <article key={title} className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
                   <h2 className="text-base font-bold tracking-normal">{title}</h2>
                   <p className="mt-2 text-sm leading-6 text-slate-600">{body}</p>
                 </article>
@@ -172,7 +172,7 @@ export function TikTokShopRoiPageContent({ market }: { market: RoiMarket }) {
       </section>
 
       <section className="border-t border-slate-200 bg-white">
-        <div className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6">
+        <div className="mx-auto w-full max-w-7xl px-4 py-10 sm:px-6 xl:max-w-[1400px]">
           <h2 className="text-2xl font-bold tracking-normal">How to use this TikTok Shop estimate</h2>
           <div className="mt-5 grid gap-4 md:grid-cols-3">
             {[
@@ -198,7 +198,7 @@ export function TikTokShopRoiPageContent({ market }: { market: RoiMarket }) {
         </div>
       </section>
 
-      <section className="mx-auto grid w-full max-w-6xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[0.72fr_1.28fr]">
+      <section className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[0.72fr_1.28fr] xl:max-w-[1400px]">
         <aside className="lg:sticky lg:top-6 lg:self-start">
           <div className="rounded-lg border border-slate-200 bg-white p-5">
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-emerald-600">
@@ -287,7 +287,7 @@ export function TikTokShopRoiPageContent({ market }: { market: RoiMarket }) {
       </section>
 
       <section className="border-y border-slate-200 bg-white">
-        <div className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6">
+        <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 xl:max-w-[1400px]">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
             <div>
               <p className="text-sm font-bold uppercase tracking-[0.18em] text-emerald-600">
@@ -335,7 +335,7 @@ export function TikTokShopRoiPageContent({ market }: { market: RoiMarket }) {
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6">
+      <section className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 xl:max-w-[1400px]">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-sm font-bold uppercase tracking-[0.18em] text-emerald-600">
@@ -367,7 +367,7 @@ export function TikTokShopRoiPageContent({ market }: { market: RoiMarket }) {
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-6xl px-4 py-12 sm:px-6" aria-labelledby="faq-title">
+      <section className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 xl:max-w-[1400px]" aria-labelledby="faq-title">
         <p className="text-sm font-bold uppercase tracking-[0.18em] text-emerald-600">FAQ</p>
         <h2 id="faq-title" className="mt-2 text-3xl font-bold tracking-normal">
           TikTok Shop ROI Calculator FAQ
@@ -384,7 +384,7 @@ export function TikTokShopRoiPageContent({ market }: { market: RoiMarket }) {
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-6xl px-4 pb-12 sm:px-6">
+      <section className="mx-auto w-full max-w-7xl px-4 pb-12 sm:px-6 xl:max-w-[1400px]">
         <p className="rounded-lg border border-slate-200 bg-slate-50 p-4 text-xs leading-5 text-slate-500">
           Based on current TikTok platform commission assumptions as of May 2026. Actual may vary.
           Always confirm your current seller fee schedule, tax treatment, shipping contract, and
