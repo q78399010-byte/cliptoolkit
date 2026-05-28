@@ -6,8 +6,6 @@ import "./globals.css";
 
 const siteUrl = getSiteUrl();
 const siteName = getSiteName();
-const googleSiteVerification =
-  process.env.GOOGLE_SITE_VERIFICATION ?? process.env.GOOGLE_SEARCH_CONSOLE_VERIFICATION;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -31,11 +29,9 @@ export const metadata: Metadata = {
     title: "Download TikTok & Instagram Videos Without Watermark",
     description: "Fast, Free, HD Quality."
   },
-  verification: googleSiteVerification
-    ? {
-        google: googleSiteVerification
-      }
-    : undefined
+  verification: {
+    google: "4rabzGpSQmyCFXaFML5Sv1vxVbG6tCmaocFtpAUM-z8"
+  }
 };
 
 export const viewport: Viewport = {
