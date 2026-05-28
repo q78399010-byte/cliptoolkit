@@ -58,6 +58,12 @@ const internalToolLinks = [
     status: ""
   },
   {
+    title: "TikTok Shop ROI Calculator",
+    href: "/tools/tiktok-shop-roi-calculator",
+    description: "Estimate TikTok Shop revenue, ad spend efficiency, ROAS, and net profit.",
+    status: "Live"
+  },
+  {
     title: "YouTube Revenue Calculator",
     href: "/tools/youtube-revenue-calculator",
     description: "Estimate YouTube RPM income, sponsorship upside, and channel revenue scenarios.",
@@ -395,7 +401,7 @@ export default function UgcRateCalculatorPage() {
             business decisions.
           </p>
         </div>
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
+        <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {internalToolLinks.map((tool) => (
             <Link
               key={tool.href}

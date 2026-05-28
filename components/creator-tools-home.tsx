@@ -23,6 +23,14 @@ const featuredTools: Tool[] = [
     cta: "Try Calculator"
   },
   {
+    title: "TikTok Shop ROI Calculator",
+    description: "Estimate ad profit and ROAS",
+    href: "/tools/tiktok-shop-roi-calculator",
+    category: "TikTok Tools",
+    status: "Live",
+    cta: "Try Calculator"
+  },
+  {
     title: "UGC Rate Calculator",
     description: "Price brand collaborations",
     href: "/tools/ugc-rate-calculator",
@@ -72,7 +80,7 @@ const categories = [
 ];
 
 const trustSignals = [
-  ["3 Live Creator Tools", "More tools launching weekly"],
+  ["4 Live Creator Tools", "More tools launching weekly"],
   ["4 Creator Categories", "TikTok, UGC, YouTube, Finance"],
   ["100% Free Access", "No signup required"],
   ["Creator-first Platform", "Built for independent creators"]
@@ -146,8 +154,8 @@ export function CreatorToolsHome() {
               Free Creator Business Tools for TikTok, UGC & YouTube
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
-              Calculate TikTok earnings, price UGC brand deals, estimate YouTube revenue, and make
-              smarter creator business decisions.
+              Calculate TikTok earnings, estimate TikTok Shop ROI, price UGC brand deals, estimate
+              YouTube revenue, and make smarter creator business decisions.
             </p>
             <p className="mt-3 max-w-3xl text-lg leading-8 text-slate-600">
               Designed for creators, freelancers, agencies, and TikTok Shop sellers.
@@ -222,12 +230,13 @@ export function CreatorToolsHome() {
             </h2>
           </div>
           <p className="max-w-xl text-sm leading-6 text-slate-600">
-            Start with TikTok earnings, then use the live UGC and YouTube calculators to plan
-            pricing, creator revenue, and sponsorship rates as ClipToolkit expands.
+            Start with TikTok earnings and TikTok Shop ROI, then use the live UGC and YouTube
+            calculators to plan pricing, creator revenue, and sponsorship rates as ClipToolkit
+            expands.
           </p>
         </div>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+        <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
           {filteredTools.map((tool) => (
             <ToolCard key={tool.href} tool={tool} />
           ))}
@@ -396,6 +405,7 @@ export function CreatorToolsHome() {
             title="Tools"
             links={[
               ["TikTok Money Calculator", "/tools/tiktok-money-calculator"],
+              ["TikTok Shop ROI Calculator", "/tools/tiktok-shop-roi-calculator"],
               ["UGC Calculator", "/tools/ugc-rate-calculator"],
               ["YouTube Revenue Calculator", "/tools/youtube-revenue-calculator"]
             ]}
