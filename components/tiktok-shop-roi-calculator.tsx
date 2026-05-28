@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { trackGaEvent } from "@/components/google-analytics";
+import { trackGaEvent } from "@/lib/google-analytics";
 import type { RoiMarket } from "@/lib/tiktok-shop-roi";
 
 type CostModel = "cpm" | "cpc";

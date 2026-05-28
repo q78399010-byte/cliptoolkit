@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { trackGaEvent } from "@/components/google-analytics";
+import { trackGaEvent } from "@/lib/google-analytics";
 
 type RoiCurrencyLinkProps = {
   active: boolean;
