@@ -495,6 +495,14 @@ export function TikTokShopRoiCalculator({ market }: { market: RoiMarket }) {
   }
 
   function handleCalculate() {
+    trackGaEvent("calculate_roi", {
+      currency: market.currencyCode,
+      scenario: activeScenario,
+      roi: Number(activeMetrics.roi.toFixed(2)),
+      roas: activeMetrics.roas === null ? null : Number(activeMetrics.roas.toFixed(2)),
+      net_profit: Number(activeMetrics.netProfit.toFixed(2))
+    });
+
     setStatusMessage("ROI updated from the current inputs. Results refresh automatically as you edit.");
   }
 
