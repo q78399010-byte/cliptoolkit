@@ -1,10 +1,11 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { RoiMarket } from "@/lib/tiktok-shop-roi";
 
 type CostModel = "cpm" | "cpc";
 type ScenarioKey = "A" | "B";
+type TemplateField = "costModel" | "adRate" | "conversionRate" | "returnRate" | "commissionRate";
 
 type ScenarioState = {
   productPrice: string;
@@ -41,6 +42,62 @@ type Diagnosis = {
   message: string;
   suggestions: string[];
 };
+
+type IndustryTemplate = {
+  name: string;
+  cpc: string;
+  conversionRate: string;
+  returnRate: string;
+  commissionRate: string;
+};
+
+const industryTemplates: IndustryTemplate[] = [
+  {
+    name: "Beauty / Cosmetics",
+    cpc: "0.8",
+    conversionRate: "2.5",
+    returnRate: "12",
+    commissionRate: "8"
+  },
+  {
+    name: "Fashion / Apparel",
+    cpc: "0.9",
+    conversionRate: "2.0",
+    returnRate: "18",
+    commissionRate: "10"
+  },
+  {
+    name: "Electronics",
+    cpc: "1.5",
+    conversionRate: "1.3",
+    returnRate: "5",
+    commissionRate: "6"
+  },
+  {
+    name: "Home Goods",
+    cpc: "1.0",
+    conversionRate: "2.1",
+    returnRate: "8",
+    commissionRate: "8"
+  }
+];
+
+const templateFields: TemplateField[] = [
+  "costModel",
+  "adRate",
+  "conversionRate",
+  "returnRate",
+  "commissionRate"
+];
+
+const inputBaseClass =
+  "min-h-12 rounded-md border px-4 text-base text-slate-950 outline-none transition-all duration-500 focus:border-emerald-300 focus:bg-white focus:ring-4 focus:ring-emerald-100";
+
+function fieldInputClass(isHighlighted: boolean) {
+  return isHighlighted
+    ? `${inputBaseClass} border-emerald-300 bg-emerald-50 ring-4 ring-emerald-100`
+    : `${inputBaseClass} border-slate-200 bg-slate-50`;
+}
 
 const initialScenarios: Record<ScenarioKey, ScenarioState> = {
   A: {
@@ -321,6 +378,12 @@ export function TikTokShopRoiCalculator({ market }: { market: RoiMarket }) {
   const [email, setEmail] = useState("");
   const [statusMessage, setStatusMessage] = useState("");
   const [adviceMessage, setAdviceMessage] = useState("");
+  const [activeTemplateByScenario, setActiveTemplateByScenario] = useState<Record<ScenarioKey, string>>({
+    A: "",
+    B: ""
+  });
+  const [highlightedTemplateFields, setHighlightedTemplateFields] = useState<TemplateField[]>([]);
+  const highlightTimer = useRef<number | null>(null);
 
   const money = useMemo(() => currencyFormatter(market), [market]);
   const moneyWithDecimals = useMemo(() => decimalCurrencyFormatter(market), [market]);
@@ -356,6 +419,15 @@ export function TikTokShopRoiCalculator({ market }: { market: RoiMarket }) {
   const guidance = adviceFor(activeMetrics, activeInputs);
   const diagnosis = useMemo(() => diagnoseCampaign(activeMetrics.roi), [activeMetrics.roi]);
   const diagnosisStyle = diagnosisStyles(diagnosis.tone);
+  const activeTemplateName = activeTemplateByScenario[activeScenario];
+
+  useEffect(() => {
+    return () => {
+      if (highlightTimer.current) {
+        window.clearTimeout(highlightTimer.current);
+      }
+    };
+  }, []);
 
   function updateScenario<K extends keyof ScenarioState>(field: K, value: ScenarioState[K]) {
     setScenarios((current) => ({
@@ -365,6 +437,42 @@ export function TikTokShopRoiCalculator({ market }: { market: RoiMarket }) {
         [field]: value
       }
     }));
+    setActiveTemplateByScenario((current) => ({
+      ...current,
+      [activeScenario]: ""
+    }));
+  }
+
+  function handleLoadTemplate(template: IndustryTemplate) {
+    setScenarios((current) => ({
+      ...current,
+      [activeScenario]: {
+        ...current[activeScenario],
+        costModel: "cpc",
+        adRate: template.cpc,
+        conversionRate: template.conversionRate,
+        returnRate: template.returnRate,
+        commissionRate: template.commissionRate
+      }
+    }));
+    setActiveTemplateByScenario((current) => ({
+      ...current,
+      [activeScenario]: template.name
+    }));
+    setStatusMessage(`${template.name} benchmark loaded into Scenario ${activeScenario}.`);
+    setHighlightedTemplateFields(templateFields);
+
+    if (highlightTimer.current) {
+      window.clearTimeout(highlightTimer.current);
+    }
+
+    highlightTimer.current = window.setTimeout(() => {
+      setHighlightedTemplateFields([]);
+    }, 900);
+  }
+
+  function isTemplateFieldHighlighted(field: TemplateField) {
+    return highlightedTemplateFields.includes(field);
   }
 
   function handleCalculate() {
@@ -519,6 +627,58 @@ export function TikTokShopRoiCalculator({ market }: { market: RoiMarket }) {
         </button>
       </div>
 
+      <div className="mt-6 rounded-lg border border-slate-200 bg-slate-50 p-4">
+        <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-emerald-600">
+              Load Industry Template
+            </p>
+            <h3 className="mt-1 text-lg font-bold tracking-normal text-slate-950">
+              Benchmark assumptions
+            </h3>
+          </div>
+          <p className="text-sm leading-6 text-slate-500">
+            Preloaded benchmark assumptions for your category
+          </p>
+        </div>
+        <div className="mt-4 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+          {industryTemplates.map((template) => {
+            const isActive = activeTemplateName === template.name;
+
+            return (
+              <button
+                key={template.name}
+                type="button"
+                onClick={() => handleLoadTemplate(template)}
+                className={
+                  isActive
+                    ? "min-h-[152px] rounded-lg border border-emerald-300 bg-white p-4 text-left shadow-sm ring-4 ring-emerald-100 transition-all duration-300"
+                    : "min-h-[152px] rounded-lg border border-slate-200 bg-white p-4 text-left transition-all duration-300 hover:border-emerald-200 hover:shadow-sm"
+                }
+                aria-pressed={isActive}
+              >
+                <span className="block text-sm font-black text-slate-950">{template.name}</span>
+                <span className="mt-3 grid grid-cols-2 gap-2 text-xs font-semibold leading-5 text-slate-600">
+                  <span>CPC: {moneyWithDecimals.format(Number(template.cpc))}</span>
+                  <span>CVR: {template.conversionRate}%</span>
+                  <span>Returns: {template.returnRate}%</span>
+                  <span>Fee: {template.commissionRate}%</span>
+                </span>
+                <span
+                  className={
+                    isActive
+                      ? "mt-4 inline-flex rounded-md bg-emerald-100 px-2.5 py-1 text-xs font-bold text-emerald-700"
+                      : "mt-4 inline-flex rounded-md bg-slate-100 px-2.5 py-1 text-xs font-bold text-slate-500"
+                  }
+                >
+                  {isActive ? "Loaded" : "Apply"}
+                </span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         <label className="grid gap-2">
           <span className="text-sm font-bold text-slate-700">Product price per unit</span>
@@ -536,7 +696,7 @@ export function TikTokShopRoiCalculator({ market }: { market: RoiMarket }) {
             inputMode="decimal"
             value={activeInputs.conversionRate}
             onChange={(event) => updateScenario("conversionRate", event.target.value)}
-            className="min-h-12 rounded-md border border-slate-200 bg-slate-50 px-4 text-base text-slate-950 outline-none transition focus:border-emerald-300 focus:bg-white focus:ring-4 focus:ring-emerald-100"
+            className={fieldInputClass(isTemplateFieldHighlighted("conversionRate"))}
           />
         </label>
 
@@ -590,7 +750,7 @@ export function TikTokShopRoiCalculator({ market }: { market: RoiMarket }) {
             <select
               value={activeInputs.costModel}
               onChange={(event) => updateScenario("costModel", event.target.value as CostModel)}
-              className="min-h-12 rounded-md border border-slate-200 bg-slate-50 px-3 text-base text-slate-950 outline-none transition focus:border-emerald-300 focus:bg-white focus:ring-4 focus:ring-emerald-100"
+              className={fieldInputClass(isTemplateFieldHighlighted("costModel"))}
             >
               <option value="cpm">CPM</option>
               <option value="cpc">CPC</option>
@@ -599,7 +759,7 @@ export function TikTokShopRoiCalculator({ market }: { market: RoiMarket }) {
               inputMode="decimal"
               value={activeInputs.adRate}
               onChange={(event) => updateScenario("adRate", event.target.value)}
-              className="min-h-12 rounded-md border border-slate-200 bg-slate-50 px-4 text-base text-slate-950 outline-none transition focus:border-emerald-300 focus:bg-white focus:ring-4 focus:ring-emerald-100"
+              className={fieldInputClass(isTemplateFieldHighlighted("adRate"))}
             />
           </div>
         </label>
@@ -610,7 +770,7 @@ export function TikTokShopRoiCalculator({ market }: { market: RoiMarket }) {
             inputMode="decimal"
             value={activeInputs.commissionRate}
             onChange={(event) => updateScenario("commissionRate", event.target.value)}
-            className="min-h-12 rounded-md border border-slate-200 bg-slate-50 px-4 text-base text-slate-950 outline-none transition focus:border-emerald-300 focus:bg-white focus:ring-4 focus:ring-emerald-100"
+            className={fieldInputClass(isTemplateFieldHighlighted("commissionRate"))}
           />
         </label>
 
@@ -630,7 +790,7 @@ export function TikTokShopRoiCalculator({ market }: { market: RoiMarket }) {
             inputMode="decimal"
             value={activeInputs.returnRate}
             onChange={(event) => updateScenario("returnRate", event.target.value)}
-            className="min-h-12 rounded-md border border-slate-200 bg-slate-50 px-4 text-base text-slate-950 outline-none transition focus:border-emerald-300 focus:bg-white focus:ring-4 focus:ring-emerald-100"
+            className={fieldInputClass(isTemplateFieldHighlighted("returnRate"))}
           />
         </label>
 
