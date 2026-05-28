@@ -6,60 +6,68 @@ import { createFaqSchema } from "@/lib/seo/schema";
 
 const canonicalUrl = "https://www.cliptoolkit.com/tools/ugc-rate-calculator";
 const ogImageUrl = "https://www.cliptoolkit.com/og/ugc-rate-calculator.svg";
-const pageTitle = "UGC Rate Calculator (2026)  How Much Should You Charge?";
+const pageTitle = "UGC Rate Calculator (2026) | How Much Should You Charge?";
 const pageDescription =
-  "Free UGC Rate Calculator. Estimate how much to charge brands for UGC content using deliverables, usage rights, revisions, experience level, and turnaround speed.";
+  "Free UGC Rate Calculator for 2026. Estimate realistic creator rates for UGC videos, usage rights, revisions, experience level, turnaround, and monthly packages.";
 
 const faqItems = [
   {
-    question: "How much should beginner UGC creators charge?",
+    question: "How much should a beginner UGC creator charge?",
     answer:
-      "Beginner UGC creators often start around $50 to $150 per deliverable, depending on video quality, niche, brief complexity, and whether usage rights are included. Even beginners should charge more when a brand wants paid ad usage, extra revisions, or rush delivery."
+      "A beginner UGC creator can often charge around $100 to $300 for one short-form video when the scope is simple, usage is organic only, and revisions are limited. Strong editing, a difficult niche, paid usage rights, or fast delivery can move the quote higher."
   },
   {
-    question: "What are usage rights?",
+    question: "Should I charge extra for paid usage rights?",
     answer:
-      "Usage rights define how a brand can use your UGC content after delivery. Organic usage usually means posting on owned social channels. Paid usage means the brand can run the content as ads. A full buyout gives the brand much broader control and should cost more."
+      "Yes. Paid usage rights let the brand run your content as advertising, which can directly support sales and expose your likeness or creative work to larger audiences. Price paid usage separately from organic posting, often with a percentage increase or a fixed licensing fee."
   },
   {
-    question: "Should I charge more for paid ads?",
+    question: "What is a full buyout in UGC?",
     answer:
-      "Yes. Paid ads usage gives the brand more commercial value from your content and can expose your likeness or creative work to larger audiences. Many creators add a clear licensing fee or percentage increase for paid usage."
+      "A full buyout means the brand receives broad control over how the content can be used, reused, edited, and distributed. Because it gives up more control than organic or limited paid usage, a full buyout should cost significantly more."
   },
   {
-    question: "What is a good UGC monthly retainer?",
+    question: "How many revisions should be included?",
     answer:
-      "A good UGC monthly retainer depends on deliverable volume, usage rights, content complexity, and creator experience. Retainers can range from a few hundred dollars for simple beginner packages to several thousand dollars for advanced creators handling strategy, scripts, editing, and ad variations."
+      "One revision round is a practical default for many UGC projects. Extra revision rounds should be priced clearly because they add editing time, project management, and schedule risk."
   },
   {
-    question: "Do brands negotiate pricing?",
+    question: "Should I offer monthly UGC packages?",
     answer:
-      "Yes. Brands often negotiate deliverable count, usage length, revisions, exclusivity, and turnaround. A clear quote helps you negotiate scope instead of simply discounting your rate."
+      "Monthly UGC packages can be useful when a brand needs a steady content pipeline. They usually include a small per-video bundle discount, but the total contract value is higher and the creator gets more predictable income."
+  },
+  {
+    question: "How do I send a UGC rate to a brand?",
+    answer:
+      "Send a short quote that defines the deliverables, price, usage rights, usage duration, included revisions, turnaround time, payment terms, and what costs extra. A clear scope makes it easier to negotiate without simply discounting your rate."
   }
 ];
 
 const recommendedTools = [
-  ["Canva Pro", "Creative assets"],
-  ["CapCut Pro", "Video editing"],
-  ["Notion", "Client workflow"],
-  ["Contra", "Find creator deals"]
+  ["Canva Pro", "Create portfolio visuals and pitch decks."],
+  ["CapCut Pro", "Edit short-form UGC videos."],
+  ["Notion", "Manage briefs, deliverables, and brand contacts."],
+  ["Contra", "Find freelance creator opportunities."]
 ];
 
 const internalToolLinks = [
   {
     title: "TikTok Money Calculator",
     href: "/tools/tiktok-money-calculator",
-    description: "Estimate creator earnings from TikTok views, RPM, engagement, and posting cadence."
+    description: "Estimate creator earnings from TikTok views, RPM, engagement, and posting cadence.",
+    status: ""
   },
   {
     title: "YouTube Revenue Calculator",
     href: "/tools/youtube-revenue-calculator",
-    description: "Estimate YouTube RPM income, sponsorship upside, and channel revenue scenarios."
+    description: "Estimate YouTube RPM income, sponsorship upside, and channel revenue scenarios.",
+    status: "Coming Soon"
   },
   {
     title: "Sponsorship Rate Calculator",
     href: "/tools/sponsorship-rate-calculator",
-    description: "Estimate brand deal pricing from reach, engagement, niche, and campaign value."
+    description: "Estimate brand deal pricing from reach, engagement, niche, and campaign value.",
+    status: "Coming Soon"
   }
 ];
 
@@ -184,20 +192,24 @@ export default function UgcRateCalculatorPage() {
 
       <section className="border-t border-slate-200 bg-white">
         <div className="mx-auto w-full max-w-6xl px-4 py-10 sm:px-6">
-          <h2 className="text-2xl font-bold tracking-normal">How to use this UGC estimate</h2>
-          <div className="mt-5 grid gap-4 md:grid-cols-3">
+          <h2 className="text-2xl font-bold tracking-normal">How to quote brands confidently</h2>
+          <div className="mt-5 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {[
               [
-                "Quote scope clearly",
-                "Separate deliverable count, revisions, usage rights, turnaround, and raw footage before discussing the final price."
+                "Define scope",
+                "Separate deliverables, concepts, hooks, edits, raw footage, and posting formats before sending the final number."
               ],
               [
-                "Protect paid usage",
-                "Paid ad rights create more brand value, so they should be priced separately from organic posting."
+                "Limit revisions",
+                "Include one revision round by default, then charge for extra review rounds that add editing and management time."
               ],
               [
-                "Anchor retainers",
-                "Monthly packages can include a slight volume discount while still creating higher total contract value."
+                "Clarify usage duration",
+                "State whether the brand can use the content for organic posts, paid ads, a fixed window, or a broader license."
+              ],
+              [
+                "Protect rights",
+                "Avoid unlimited rights unless the brand is paying extra for broad control, exclusivity, or a full buyout."
               ]
             ].map(([title, body]) => (
               <article key={title} className="rounded-lg border border-slate-200 bg-slate-50 p-5">
@@ -249,11 +261,12 @@ export default function UgcRateCalculatorPage() {
               How much should UGC creators charge?
             </h2>
             <p className="mt-4 leading-7 text-slate-600">
-              Beginner UGC creators often start with simpler projects in the $50 to $150 per
-              deliverable range. Intermediate creators with stronger portfolios, better hooks, and
-              reliable editing often move into the $150 to $400 range. Advanced creators can charge
-              $400 to $1,000 or more per deliverable when they bring proven creative direction,
-              niche expertise, ad-ready production, and commercial licensing value.
+              In 2026, beginner UGC creators commonly quote around $100 to $250 per short-form
+              video for simple organic usage. Intermediate creators with stronger portfolios,
+              reliable hooks, and cleaner editing often price projects around $250 to $600 per
+              video. Advanced creators can charge $600 to $1,200 or more per video when they bring
+              proven creative direction, niche expertise, ad-ready production, and commercial
+              licensing value.
             </p>
             <p className="mt-4 leading-7 text-slate-600">
               The best rate is not always the highest number. The best rate is the number that
@@ -269,7 +282,9 @@ export default function UgcRateCalculatorPage() {
                 ["Deliverable count", "More videos, hooks, edits, and concepts increase production time."],
                 ["Usage rights", "Paid ads and full buyouts create more commercial value for the brand."],
                 ["Revisions", "Extra review rounds should be priced because they increase project management time."],
-                ["Turnaround speed", "Fast or urgent timelines often require schedule changes and premium pricing."]
+                ["Turnaround speed", "Fast or urgent timelines often require schedule changes and premium pricing."],
+                ["Experience level", "A stronger portfolio, better strategy, and reliable delivery support higher rates."],
+                ["Niche complexity", "Technical, regulated, luxury, or high-consideration products often require more research and precision."]
               ].map(([title, body]) => (
                 <div key={title} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
                   <h3 className="font-bold tracking-normal">{title}</h3>
@@ -281,7 +296,7 @@ export default function UgcRateCalculatorPage() {
 
           <section className="rounded-lg border border-slate-200 bg-white p-6">
             <h2 className="text-2xl font-bold tracking-normal">
-              Organic vs paid usage rights
+              Organic usage vs paid usage rights
             </h2>
             <p className="mt-4 leading-7 text-slate-600">
               Organic usage usually means the brand can publish the content on its own social
@@ -289,6 +304,12 @@ export default function UgcRateCalculatorPage() {
               video as an advertisement. That creates more value and more exposure, so creators
               should charge more. A full buyout is broader still because the brand may want long
               usage windows, more placements, or fewer restrictions.
+            </p>
+            <p className="mt-4 leading-7 text-slate-600">
+              When you quote paid usage, define the duration, platforms, whitelisting permissions,
+              edits, and whether the brand can reuse the content in landing pages, email, or other
+              campaigns. Clear usage terms make the price feel more professional and protect the
+              creator if the campaign expands.
             </p>
           </section>
 
@@ -314,9 +335,9 @@ export default function UgcRateCalculatorPage() {
                 <span>Typical scope</span>
               </div>
               {[
-                ["Beginner", "$50 - $150", "One organic video, basic edit, limited revisions."],
-                ["Intermediate", "$150 - $400", "Stronger hooks, clean editing, paid usage add-ons."],
-                ["Advanced", "$400 - $1,000+", "Ad-ready strategy, variations, licensing, and retainers."]
+                ["Beginner", "$100 - $250", "One organic short-form video, basic edit, one included revision."],
+                ["Intermediate", "$250 - $600", "Stronger hooks, clean editing, paid usage add-ons, clearer process."],
+                ["Advanced", "$600 - $1,200+", "Ad-ready strategy, variations, licensing, and retainer scope."]
               ].map(([level, range, scope]) => (
                 <div
                   key={level}
@@ -344,8 +365,8 @@ export default function UgcRateCalculatorPage() {
               </h2>
             </div>
             <p className="max-w-xl text-sm leading-6 text-slate-600">
-              No affiliate links yet. These cards are placeholders for future creator stack
-              recommendations.
+              A practical stack for building UGC assets, editing short-form videos, organizing
+              client work, and finding freelance opportunities.
             </p>
           </div>
           <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -381,7 +402,14 @@ export default function UgcRateCalculatorPage() {
               href={tool.href}
               className="rounded-lg border border-slate-200 bg-white p-5 transition hover:-translate-y-0.5 hover:border-slate-300 hover:shadow-md"
             >
-              <h3 className="text-xl font-bold tracking-normal">{tool.title}</h3>
+              {tool.status ? (
+                <span className="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-bold uppercase tracking-[0.12em] text-slate-500">
+                  {tool.status}
+                </span>
+              ) : null}
+              <h3 className={tool.status ? "mt-4 text-xl font-bold tracking-normal" : "text-xl font-bold tracking-normal"}>
+                {tool.title}
+              </h3>
               <p className="mt-3 text-sm leading-6 text-slate-600">{tool.description}</p>
             </Link>
           ))}

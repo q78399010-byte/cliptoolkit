@@ -17,24 +17,24 @@ type CalculatorState = {
 };
 
 const initialState: CalculatorState = {
-  deliverables: "3",
-  experience: "intermediate",
-  usage: "paid",
+  deliverables: "1",
+  experience: "beginner",
+  usage: "organic",
   revisions: "1",
   turnaround: "standard",
   packageType: "one-time"
 };
 
 const baseRates: Record<ExperienceLevel, { low: number; medium: number; high: number }> = {
-  beginner: { low: 50, medium: 100, high: 150 },
-  intermediate: { low: 150, medium: 275, high: 400 },
-  advanced: { low: 400, medium: 700, high: 1000 }
+  beginner: { low: 100, medium: 200, high: 250 },
+  intermediate: { low: 250, medium: 425, high: 600 },
+  advanced: { low: 600, medium: 900, high: 1200 }
 };
 
 const usageMultipliers: Record<UsageRights, number> = {
   organic: 1,
-  paid: 1.35,
-  buyout: 1.7
+  paid: 1.4,
+  buyout: 1.9
 };
 
 const turnaroundMultipliers: Record<TurnaroundSpeed, number> = {
@@ -60,16 +60,82 @@ function roundToNearestTwentyFive(value: number) {
   return Math.round(value / 25) * 25;
 }
 
-function guidanceForExperience(experience: ExperienceLevel) {
+function guidanceForState(state: CalculatorState) {
+  const guidance: string[] = [];
+
+  if (state.experience === "beginner") {
+    guidance.push(
+      "Start with portfolio-building projects, but avoid unlimited usage rights at beginner rates."
+    );
+  }
+
+  if (state.usage === "paid") {
+    guidance.push(
+      "Paid usage means the brand can run your content as ads. Charge more because your content may directly drive sales."
+    );
+  }
+
+  if (state.usage === "buyout") {
+    guidance.push(
+      "Full buyout gives the brand broad control over your content. This should cost significantly more than organic usage."
+    );
+  }
+
+  if (state.turnaround === "urgent") {
+    guidance.push(
+      "Urgent delivery should include a rush fee because it affects your schedule and creative capacity."
+    );
+  }
+
+  if (state.packageType === "retainer") {
+    guidance.push(
+      "Monthly retainers usually lower the per-video price slightly but create more predictable income."
+    );
+  }
+
+  if (!guidance.length) {
+    guidance.push(
+      "Use this range as a planning anchor, then adjust for niche complexity, creative direction, raw footage, and licensing length."
+    );
+  }
+
+  return guidance;
+}
+
+function labelForUsage(usage: UsageRights) {
+  if (usage === "paid") {
+    return "Paid ads usage";
+  }
+
+  if (usage === "buyout") {
+    return "Full buyout";
+  }
+
+  return "Organic only";
+}
+
+function labelForTurnaround(turnaround: TurnaroundSpeed) {
+  if (turnaround === "fast") {
+    return "Fast 48h";
+  }
+
+  if (turnaround === "urgent") {
+    return "Urgent 24h";
+  }
+
+  return "Standard";
+}
+
+function labelForExperience(experience: ExperienceLevel) {
   if (experience === "beginner") {
-    return "Do not underprice yourself. Keep the first packages simple, build a portfolio, collect testimonials, and charge extra when the brand wants paid usage rights.";
+    return "Beginner";
   }
 
   if (experience === "intermediate") {
-    return "Start increasing rates for paid usage and monthly retainers. Brands are paying for reliability, concept quality, hooks, editing, and lower revision risk.";
+    return "Intermediate";
   }
 
-  return "Prioritize retainers and paid ads licensing. At this level, usage rights, exclusivity, reporting, and campaign value should drive pricing as much as deliverable count.";
+  return "Advanced";
 }
 
 export function UgcRateCalculator() {
@@ -80,25 +146,26 @@ export function UgcRateCalculator() {
     const revisions = Math.max(0, numberFromInput(state.revisions));
     const base = baseRates[state.experience];
     const usageMultiplier = usageMultipliers[state.usage];
-    const revisionMultiplier = 1 + Math.max(0, revisions - 1) * 0.08;
+    const revisionMultiplier = 1 + Math.max(0, revisions - 1) * 0.125;
     const turnaroundMultiplier = turnaroundMultipliers[state.turnaround];
-    const packageMultiplier = state.packageType === "retainer" ? 0.9 : 1;
+    const bundleDiscount = state.packageType === "retainer" ? 0.88 : 1;
+    const pricedDeliverables = state.packageType === "retainer" ? Math.max(deliverables, 4) : deliverables;
 
     function estimate(rate: number) {
       return (
         rate *
-        deliverables *
+        pricedDeliverables *
         usageMultiplier *
         revisionMultiplier *
         turnaroundMultiplier *
-        packageMultiplier
+        bundleDiscount
       );
     }
 
     const low = estimate(base.low);
     const medium = estimate(base.medium);
     const high = estimate(base.high);
-    const pitch = roundToNearestTwentyFive(state.packageType === "retainer" ? medium * 1.08 : medium);
+    const pitch = roundToNearestTwentyFive(medium);
 
     return {
       low,
@@ -106,8 +173,10 @@ export function UgcRateCalculator() {
       high,
       pitch,
       deliverables,
+      pricedDeliverables,
       revisions,
-      guidance: guidanceForExperience(state.experience)
+      discountPercent: state.packageType === "retainer" ? 12 : 0,
+      guidance: guidanceForState(state)
     };
   }, [state]);
 
@@ -134,7 +203,7 @@ export function UgcRateCalculator() {
         </div>
         <div className="rounded-md bg-slate-950 px-3 py-2 text-right text-white">
           <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-slate-300">
-            Suggested brand pitch price
+            Suggested pitch price
           </p>
           <p className="mt-1 text-lg font-black">{currency(result.pitch)}</p>
         </div>
@@ -226,9 +295,9 @@ export function UgcRateCalculator() {
 
       <div className="mt-6 grid gap-3 sm:grid-cols-3">
         {[
-          ["LOW", result.low],
-          ["MEDIUM", result.medium],
-          ["HIGH", result.high]
+          ["Low", result.low],
+          ["Recommended", result.medium],
+          ["Premium", result.high]
         ].map(([label, value]) => (
           <div key={label as string} className="rounded-lg border border-slate-200 bg-slate-50 p-4">
             <p className="text-xs font-bold uppercase tracking-[0.16em] text-slate-500">
@@ -241,11 +310,37 @@ export function UgcRateCalculator() {
         ))}
       </div>
 
+      <div className="mt-4 rounded-lg border border-slate-200 bg-white p-4">
+        <p className="text-sm font-bold text-slate-950">
+          Suggested pitch price: {currency(result.pitch)}
+        </p>
+        <p className="mt-2 text-xs leading-5 text-slate-500">
+          Based on {result.pricedDeliverables} {result.pricedDeliverables === 1 ? "deliverable" : "deliverables"},
+          {" "}
+          {labelForExperience(state.experience).toLowerCase()} experience, {labelForUsage(state.usage).toLowerCase()},
+          {" "}
+          {result.revisions} {result.revisions === 1 ? "revision" : "revisions"}, and{" "}
+          {labelForTurnaround(state.turnaround).toLowerCase()} turnaround.
+          {result.discountPercent > 0
+            ? ` Monthly package pricing includes a ${result.discountPercent}% bundle discount.`
+            : ""}
+        </p>
+      </div>
+
+      <p className="mt-4 rounded-lg border border-slate-200 bg-slate-50 p-4 text-xs leading-5 text-slate-500">
+        Most beginner UGC creators charge around $100-$300 per short-form video, while experienced
+        creators often charge more depending on usage rights, turnaround, and brand scope.
+      </p>
+
       <div className="mt-6 rounded-lg border border-emerald-200 bg-emerald-50 p-5">
         <p className="text-sm font-bold uppercase tracking-[0.16em] text-emerald-700">
           Creator guidance
         </p>
-        <p className="mt-3 leading-7 text-slate-700">{result.guidance}</p>
+        <ul className="mt-3 grid gap-3 text-sm leading-6 text-slate-700">
+          {result.guidance.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
       </div>
 
       <p className="mt-5 text-xs leading-5 text-slate-500">
