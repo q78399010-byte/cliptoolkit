@@ -35,8 +35,8 @@ const featuredTools: Tool[] = [
     description: "Estimate creator RPM income",
     href: "/tools/youtube-revenue-calculator",
     category: "YouTube Tools",
-    status: "Coming Soon",
-    cta: "Coming Soon"
+    status: "Live",
+    cta: "Try Calculator"
   },
   {
     title: "Sponsorship Rate Calculator",
@@ -72,7 +72,7 @@ const categories = [
 ];
 
 const trustSignals = [
-  ["2 Live Creator Tools", "More tools launching weekly"],
+  ["3 Live Creator Tools", "More tools launching weekly"],
   ["4 Creator Categories", "TikTok, UGC, YouTube, Finance"],
   ["100% Free Access", "No signup required"],
   ["Creator-first Platform", "Built for independent creators"]
@@ -222,8 +222,8 @@ export function CreatorToolsHome() {
             </h2>
           </div>
           <p className="max-w-xl text-sm leading-6 text-slate-600">
-            Start with TikTok earnings today, then use the coming tool pages to plan UGC pricing,
-            YouTube revenue, and sponsorship rates as ClipToolkit expands.
+            Start with TikTok earnings, then use the live UGC and YouTube calculators to plan
+            pricing, creator revenue, and sponsorship rates as ClipToolkit expands.
           </p>
         </div>
 

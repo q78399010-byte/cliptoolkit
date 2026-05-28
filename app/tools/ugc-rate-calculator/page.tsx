@@ -61,7 +61,7 @@ const internalToolLinks = [
     title: "YouTube Revenue Calculator",
     href: "/tools/youtube-revenue-calculator",
     description: "Estimate YouTube RPM income, sponsorship upside, and channel revenue scenarios.",
-    status: "Coming Soon"
+    status: "Live"
   },
   {
     title: "Sponsorship Rate Calculator",

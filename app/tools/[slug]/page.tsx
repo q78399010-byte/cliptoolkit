@@ -3,12 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 const comingSoonTools = {
-  "youtube-revenue-calculator": {
-    title: "YouTube Revenue Calculator",
-    description:
-      "Estimate YouTube creator revenue from views, RPM, Shorts performance, sponsorships, and channel growth.",
-    category: "YouTube Tools"
-  },
   "sponsorship-rate-calculator": {
     title: "Sponsorship Rate Calculator",
     description:

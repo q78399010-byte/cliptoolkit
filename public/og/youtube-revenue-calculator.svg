@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">YouTube Revenue Calculator by ClipToolkit</title>
+  <desc id="desc">Open graph preview image for a YouTube creator revenue calculator.</desc>
+  <rect width="1200" height="630" fill="#f7f9fc"/>
+  <rect x="70" y="70" width="1060" height="490" rx="32" fill="#ffffff" stroke="#d7dde8" stroke-width="2"/>
+  <rect x="110" y="112" width="72" height="72" rx="14" fill="#0f172a"/>
+  <text x="146" y="159" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="800" fill="#ffffff">C</text>
+  <text x="205" y="156" font-family="Arial, sans-serif" font-size="30" font-weight="800" fill="#0f172a">ClipToolkit</text>
+  <text x="110" y="255" font-family="Arial, sans-serif" font-size="60" font-weight="900" fill="#0f172a">YouTube Revenue Calculator</text>
+  <text x="110" y="322" font-family="Arial, sans-serif" font-size="31" font-weight="600" fill="#475569">Estimate earnings from views, RPM, niche, and upload cadence.</text>
+  <rect x="110" y="390" width="290" height="86" rx="18" fill="#ecfdf5" stroke="#a7f3d0"/>
+  <text x="138" y="424" font-family="Arial, sans-serif" font-size="18" font-weight="800" fill="#047857">LOW / RECOMMENDED / PREMIUM</text>
+  <text x="138" y="459" font-family="Arial, sans-serif" font-size="26" font-weight="900" fill="#0f172a">2026 Revenue Plan</text>
+  <rect x="430" y="390" width="300" height="86" rx="18" fill="#f8fafc" stroke="#d7dde8"/>
+  <text x="458" y="424" font-family="Arial, sans-serif" font-size="18" font-weight="800" fill="#475569">SHORTS &amp; LONG-FORM</text>
+  <text x="458" y="459" font-family="Arial, sans-serif" font-size="26" font-weight="900" fill="#0f172a">RPM Scenarios</text>
+  <rect x="760" y="390" width="260" height="86" rx="18" fill="#0f172a"/>
+  <text x="890" y="440" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="900" fill="#ffffff">Free Tool</text>
+</svg>

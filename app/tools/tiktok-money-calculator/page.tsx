@@ -87,13 +87,13 @@ const internalToolLinks = [
     title: "YouTube Revenue Calculator",
     href: "/tools/youtube-revenue-calculator",
     description: "Model YouTube AdSense, Shorts revenue, sponsorships, and monthly channel income.",
-    status: "Coming soon"
+    status: "Live"
   },
   {
     title: "Sponsorship Rate Calculator",
     href: "/tools/sponsorship-rate-calculator",
     description: "Price sponsored posts using views, engagement, niche, deliverables, and campaign value.",
-    status: "Coming soon"
+    status: "Coming Soon"
   }
 ];
 
