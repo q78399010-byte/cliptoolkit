@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { trackGaEvent } from "@/lib/google-analytics";
 
 type RoiCurrencyLinkProps = {
   active: boolean;
@@ -13,12 +12,6 @@ export function RoiCurrencyLink({ active, currencyCode, href }: RoiCurrencyLinkP
   return (
     <Link
       href={href}
-      onClick={() => {
-        trackGaEvent("currency_switch", {
-          currency: currencyCode.toLowerCase(),
-          target_currency: currencyCode
-        });
-      }}
       className={
         active
           ? "rounded-md bg-slate-950 px-3 py-2 text-sm font-bold text-white"

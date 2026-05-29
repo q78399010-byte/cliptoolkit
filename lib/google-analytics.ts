@@ -1,4 +1,4 @@
-export const GA_TAG_ID = "G-VZYW61YT2Y";
+export const GA_TAG_ID = "G-VZW61VT2Y";
 
 type GtagArguments =
   | [command: "js", date: Date]
@@ -13,19 +13,10 @@ declare global {
 }
 
 export function sendGtag(...args: GtagArguments) {
-  if (typeof window === "undefined") {
-    return;
-  }
-
-  window.dataLayer = window.dataLayer ?? [];
-  window.gtag =
-    window.gtag ??
-    ((...gtagArgs: GtagArguments) => {
-      window.dataLayer?.push(gtagArgs);
-    });
-  window.gtag(...args);
+  void args;
 }
 
 export function trackGaEvent(eventName: string, parameters?: Record<string, unknown>) {
-  sendGtag("event", eventName, parameters);
+  void eventName;
+  void parameters;
 }

@@ -12,6 +12,7 @@
     "db:smoke": "node --no-warnings=ExperimentalWarning scripts/db-smoke.mjs"
   },
   "dependencies": {
+    "@next/third-parties": "^16.2.6",
     "next": "^15.0.0",
     "pg": "^8.21.0",
     "react": "^19.0.0",

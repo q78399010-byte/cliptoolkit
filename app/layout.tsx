@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { AnalyticsTracker } from "@/components/analytics-tracker";
-import { GoogleAnalytics } from "@/components/google-analytics";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import { getSiteName, getSiteUrl } from "@/lib/seo/site";
 import "./globals.css";
 
@@ -49,8 +48,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <GoogleAnalytics />
-        <AnalyticsTracker />
+        <GoogleAnalytics gaId="G-VZW61VT2Y" />
         {children}
       </body>
     </html>

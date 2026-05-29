@@ -1,7 +1,6 @@
 "use client";
 
 import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
-import { trackAnalyticsEvent } from "@/components/analytics-tracker";
 import { detectSupportedPlatform, type SupportedPlatform } from "@/lib/platform";
 
 type AnalyzeStatus = "idle" | "ready" | "invalid" | "analyzing" | "success" | "failed";
@@ -246,21 +245,6 @@ export function DownloadWidget() {
     }
   }
 
-  function trackDownloadClick(type: "video" | "audio") {
-    if (!result) {
-      return;
-    }
-
-    trackAnalyticsEvent({
-      eventName: "download_click",
-      platform: result.platform,
-      metadata: {
-        type,
-        cacheHit: result.cacheHit ?? false
-      }
-    });
-  }
-
   return (
     <div className="mx-auto w-full max-w-4xl">
       <div className="surface rounded-[28px] p-3 shadow-soft sm:p-4">
@@ -376,7 +360,6 @@ export function DownloadWidget() {
                 {videoAsset ? (
                   <a
                     href={mediaDownloadHref(videoAsset.url, result.title, "video")}
-                    onClick={() => trackDownloadClick("video")}
                     className="focus-ring flex min-h-14 items-center justify-center rounded-2xl bg-mint px-5 text-center text-base font-black text-ink transition hover:bg-[#75f4c6]"
                   >
                     Download Video
@@ -394,7 +377,6 @@ export function DownloadWidget() {
                 {audioAsset ? (
                   <a
                     href={mediaDownloadHref(audioAsset.url, result.title, "audio")}
-                    onClick={() => trackDownloadClick("audio")}
                     className="focus-ring flex min-h-14 items-center justify-center rounded-2xl border border-white/14 bg-white/[0.04] px-5 text-center text-base font-black text-white transition hover:border-mint/40 hover:bg-white/[0.07]"
                   >
                     Download Audio
