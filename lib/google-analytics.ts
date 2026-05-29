@@ -13,10 +13,23 @@ declare global {
 }
 
 export function sendGtag(...args: GtagArguments) {
-  void args;
+  if (typeof window === "undefined") {
+    return;
+  }
+
+  window.dataLayer = window.dataLayer ?? [];
+  window.gtag =
+    window.gtag ??
+    ((...gtagArgs: GtagArguments) => {
+      window.dataLayer?.push(gtagArgs);
+    });
+  window.gtag(...args);
 }
 
 export function trackGaEvent(eventName: string, parameters?: Record<string, unknown>) {
-  void eventName;
-  void parameters;
+  sendGtag("event", eventName, parameters);
+}
+
+export function trackGaPageView(parameters: Record<string, unknown>) {
+  trackGaEvent("page_view", parameters);
 }

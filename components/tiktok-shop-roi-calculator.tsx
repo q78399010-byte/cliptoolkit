@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { trackGaEvent } from "@/lib/google-analytics";
 import type { RoiMarket } from "@/lib/tiktok-shop-roi";
 
 type CostModel = "cpm" | "cpc";
@@ -444,6 +445,13 @@ export function TikTokShopRoiCalculator({ market }: { market: RoiMarket }) {
   }
 
   function handleLoadTemplate(template: IndustryTemplate) {
+    trackGaEvent("industry_template_apply", {
+      tool: "TikTok Shop ROI Calculator",
+      currency: market.currencyCode,
+      industry_template: template.name,
+      scenario: activeScenario
+    });
+
     setScenarios((current) => ({
       ...current,
       [activeScenario]: {
@@ -476,10 +484,26 @@ export function TikTokShopRoiCalculator({ market }: { market: RoiMarket }) {
   }
 
   function handleCompareToggle() {
+    trackGaEvent("compare_toggle", {
+      tool: "TikTok Shop ROI Calculator",
+      currency: market.currencyCode,
+      enabled: !compareEnabled,
+      scenario: activeScenario
+    });
+
     setCompareEnabled((current) => !current);
   }
 
   function handleCalculate() {
+    trackGaEvent("calculate_roi", {
+      tool: "TikTok Shop ROI Calculator",
+      currency: market.currencyCode,
+      scenario: activeScenario,
+      roi: Number(activeMetrics.roi.toFixed(2)),
+      roas: activeMetrics.roas === null ? null : Number(activeMetrics.roas.toFixed(2)),
+      net_profit: Number(activeMetrics.netProfit.toFixed(2))
+    });
+
     setStatusMessage("ROI updated from the current inputs. Results refresh automatically as you edit.");
   }
 
@@ -493,6 +517,13 @@ export function TikTokShopRoiCalculator({ market }: { market: RoiMarket }) {
   }
 
   function handlePersonalizedAdvice() {
+    trackGaEvent("personalized_advice", {
+      tool: "TikTok Shop ROI Calculator",
+      currency: market.currencyCode,
+      has_email: email.includes("@"),
+      scenario: activeScenario
+    });
+
     if (!email.includes("@")) {
       setStatusMessage("Enter an email address first so the advice request can include your report.");
       return;
@@ -513,6 +544,13 @@ export function TikTokShopRoiCalculator({ market }: { market: RoiMarket }) {
   }
 
   function handleExportPdf() {
+    trackGaEvent("export_pdf", {
+      tool: "TikTok Shop ROI Calculator",
+      currency: market.currencyCode,
+      has_email: email.includes("@"),
+      scenario: activeScenario
+    });
+
     if (!email.includes("@")) {
       setStatusMessage("Enter an email address to unlock the PDF export.");
       return;
