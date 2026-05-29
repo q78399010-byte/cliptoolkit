@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Ga4PageView } from "@/components/ga4-page-view";
 import { StructuredData } from "@/components/structured-data";
 import { TikTokMoneyCalculator } from "@/components/tiktok-money-calculator";
 import { createFaqSchema } from "@/lib/seo/schema";
@@ -170,7 +169,6 @@ export default function TikTokMoneyCalculatorPage() {
 
   return (
     <main className="min-h-screen bg-[#f7f9fc] text-slate-950">
-      <Ga4PageView toolName="TikTok Money Calculator" />
       <StructuredData
         data={[
           webPageSchema,

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Ga4PageView } from "@/components/ga4-page-view";
 import { TikTokShopRoiPageContent } from "@/components/tiktok-shop-roi-page-content";
 import {
   absoluteRoiUrl,
@@ -47,10 +46,5 @@ export const metadata: Metadata = {
 };
 
 export default function TikTokShopRoiCalculatorPage() {
-  return (
-    <>
-      <Ga4PageView toolName="TikTok Shop ROI Calculator" />
-      <TikTokShopRoiPageContent market={roiMarkets.usd} />
-    </>
-  );
+  return <TikTokShopRoiPageContent market={roiMarkets.usd} />;
 }

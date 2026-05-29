@@ -1,6 +1,6 @@
 import "server-only";
+import { headers } from "next/headers";
 import { getCacheStore } from "@/lib/cache/cache";
-import { getRequestAnalyticsContext, recordAnalyticsEvent } from "@/lib/db/analytics";
 import { createDownloadTask } from "@/lib/db/downloads";
 import { detectSupportedPlatform } from "@/lib/platform";
 import { getDefaultProvider } from "@/lib/providers/provider-registry";
@@ -31,6 +31,24 @@ function clientKey(ip: string | null | undefined) {
 
 function primaryVideoUrl(result: ProviderAnalyzeResult) {
   return result.downloadUrls.find((item) => item.type === "video")?.url ?? null;
+}
+
+async function getRequestAnalyticsContext() {
+  const requestHeaders = await headers();
+  const forwardedFor = requestHeaders.get("x-forwarded-for");
+  const ip = forwardedFor?.split(",")[0]?.trim() ?? requestHeaders.get("x-real-ip");
+  const country = requestHeaders.get("cf-ipcountry") ?? null;
+  const userAgent = requestHeaders.get("user-agent") ?? "";
+  const referrer = requestHeaders.get("referer") ?? null;
+  const device = /mobile|android|iphone|ipad/i.test(userAgent) ? "mobile" : "desktop";
+
+  return {
+    ip,
+    country,
+    device,
+    referrer,
+    userAgent
+  };
 }
 
 export async function analyzeUrl(url: string): Promise<AnalyzeServiceResult> {
@@ -160,22 +178,6 @@ export async function analyzeUrl(url: string): Promise<AnalyzeServiceResult> {
       providerKey: provider.key,
       downloadUrls: result.downloadUrls,
       cacheHit: Boolean(cached)
-    }
-  });
-
-  await recordAnalyticsEvent({
-    eventName: result.status === "success" ? "download_success" : "download_failed",
-    pagePath: "/api/analyze",
-    platform,
-    ip: context.ip,
-    country: context.country ?? undefined,
-    device: context.device,
-    referrer: context.referrer ?? undefined,
-    metadata: {
-      taskId,
-      provider: provider.key,
-      cacheHit: Boolean(cached),
-      errorCode: result.errorCode ?? null
     }
   });
 
