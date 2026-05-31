@@ -2,86 +2,13 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import type { CreatorTool } from "@/data/creator-tools";
+import { homepageTools, liveCreatorTools, toolCategories } from "@/data/creator-tools";
 import { homepageFaqItems } from "@/lib/homepage-content";
 
-type Tool = {
-  title: string;
-  description: string;
-  href: string;
-  category: string;
-  status: "Live" | "Coming Soon";
-  cta: string;
-};
-
-const featuredTools: Tool[] = [
-  {
-    title: "TikTok Money Calculator",
-    description: "Estimate creator earnings",
-    href: "/tools/tiktok-money-calculator",
-    category: "TikTok Tools",
-    status: "Live",
-    cta: "Try Calculator"
-  },
-  {
-    title: "TikTok Shop ROI Calculator",
-    description: "Estimate ad profit and ROAS",
-    href: "/tools/tiktok-shop-roi-calculator",
-    category: "TikTok Tools",
-    status: "Live",
-    cta: "Try Calculator"
-  },
-  {
-    title: "UGC Rate Calculator",
-    description: "Price brand collaborations",
-    href: "/tools/ugc-rate-calculator",
-    category: "UGC Pricing",
-    status: "Live",
-    cta: "Try Calculator"
-  },
-  {
-    title: "YouTube Revenue Calculator",
-    description: "Estimate creator RPM income",
-    href: "/tools/youtube-revenue-calculator",
-    category: "YouTube Tools",
-    status: "Live",
-    cta: "Try Calculator"
-  },
-  {
-    title: "Sponsorship Rate Calculator",
-    description: "Estimate brand deal pricing",
-    href: "/tools/sponsorship-rate-calculator",
-    category: "Creator Finance",
-    status: "Coming Soon",
-    cta: "Coming Soon"
-  }
-];
-
-const categories = [
-  {
-    title: "TikTok Tools",
-    id: "tiktok-tools",
-    body: "Estimate TikTok revenue, RPM, engagement quality, posting cadence, and TikTok Shop creator ROI."
-  },
-  {
-    title: "YouTube Tools",
-    id: "youtube-tools",
-    body: "Forecast YouTube RPM, sponsorship upside, Shorts performance, and monthly channel income."
-  },
-  {
-    title: "UGC Pricing",
-    id: "ugc-pricing",
-    body: "Price UGC videos, usage rights, revisions, hooks, raw footage, retainers, and brand deliverables."
-  },
-  {
-    title: "Creator Finance",
-    id: "creator-finance",
-    body: "Plan creator income goals, sponsorship pricing, tax reserves, and campaign economics."
-  }
-];
-
 const trustSignals = [
-  ["4 Live Creator Tools", "More tools launching weekly"],
-  ["4 Creator Categories", "TikTok, UGC, YouTube, Finance"],
+  [`${liveCreatorTools.length} Live Creator Tools`, "More tools launching weekly"],
+  [`${toolCategories.length} Creator Categories`, "TikTok, UGC, YouTube, Influencer, Finance"],
   ["100% Free Access", "No signup required"],
   ["Creator-first Platform", "Built for independent creators"]
 ];
@@ -91,6 +18,7 @@ const audienceCards = [
   ["UGC Creators", "Price brand collaborations confidently."],
   ["YouTubers", "Forecast RPM and creator income."],
   ["Creator Agencies", "Estimate campaign economics."],
+  ["Influencer Marketers", "Plan paid creator budgets."],
   ["TikTok Shop Sellers", "Estimate creator ROI before collaborations."]
 ];
 
@@ -103,10 +31,10 @@ export function CreatorToolsHome() {
   const normalizedQuery = normalize(query);
   const filteredTools = useMemo(() => {
     if (!normalizedQuery) {
-      return featuredTools;
+      return homepageTools;
     }
 
-    return featuredTools.filter((tool) =>
+    return homepageTools.filter((tool) =>
       normalize(`${tool.title} ${tool.description} ${tool.category}`).includes(normalizedQuery)
     );
   }, [normalizedQuery]);
@@ -121,19 +49,12 @@ export function CreatorToolsHome() {
             </span>
             <span className="text-lg">ClipToolkit</span>
           </Link>
-          <nav className="hidden items-center gap-6 text-sm font-medium text-slate-600 lg:flex">
-            <a href="#tiktok-tools" className="transition hover:text-slate-950">
-              TikTok Tools
-            </a>
-            <a href="#youtube-tools" className="transition hover:text-slate-950">
-              YouTube Tools
-            </a>
-            <a href="#ugc-pricing" className="transition hover:text-slate-950">
-              UGC Pricing
-            </a>
-            <a href="#creator-finance" className="transition hover:text-slate-950">
-              Creator Finance
-            </a>
+          <nav className="hidden items-center gap-5 text-sm font-medium text-slate-600 lg:flex">
+            {toolCategories.map((category) => (
+              <a key={category.id} href={`#${category.id}`} className="transition hover:text-slate-950">
+                {category.title}
+              </a>
+            ))}
           </nav>
           <Link
             href="/tools/tiktok-money-calculator"
@@ -151,11 +72,12 @@ export function CreatorToolsHome() {
               Free creator business tools
             </p>
             <h1 className="mt-5 max-w-4xl text-4xl font-bold leading-tight tracking-normal text-slate-950 sm:text-6xl">
-              Free Creator Business Tools for TikTok, UGC & YouTube
+              Free Creator Business Tools for TikTok, UGC, YouTube & Influencers
             </h1>
             <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-600">
               Calculate TikTok earnings, estimate TikTok Shop ROI, price UGC brand deals, estimate
-              YouTube revenue, and make smarter creator business decisions.
+              YouTube revenue, calculate TikTok ad costs, estimate influencer rates, and make
+              smarter creator business decisions.
             </p>
             <p className="mt-3 max-w-3xl text-lg leading-8 text-slate-600">
               Designed for creators, freelancers, agencies, and TikTok Shop sellers.
@@ -230,13 +152,12 @@ export function CreatorToolsHome() {
             </h2>
           </div>
           <p className="max-w-xl text-sm leading-6 text-slate-600">
-            Start with TikTok earnings and TikTok Shop ROI, then use the live UGC and YouTube
-            calculators to plan pricing, creator revenue, and sponsorship rates as ClipToolkit
-            expands.
+            Start with TikTok earnings and TikTok Shop ROI, then use the UGC, YouTube, TikTok ad,
+            engagement, and influencer calculators to plan creator revenue and campaign economics.
           </p>
         </div>
 
-        <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <div className="mt-6 grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filteredTools.map((tool) => (
             <ToolCard key={tool.href} tool={tool} />
           ))}
@@ -245,8 +166,8 @@ export function CreatorToolsHome() {
 
       <section id="about" className="scroll-mt-24 border-y border-slate-200 bg-white">
         <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6">
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {categories.map((category) => (
+          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+            {toolCategories.map((category) => (
               <article
                 key={category.id}
                 id={category.id}
@@ -335,6 +256,15 @@ export function CreatorToolsHome() {
               not be priced like a casual mention. A calculator gives creators a starting point for
               negotiation and gives agencies a cleaner way to compare campaign economics.
             </p>
+            <h3 className="mt-6 text-xl font-bold tracking-normal">
+              How TikTok ad metrics connect to creator pricing
+            </h3>
+            <p className="mt-3 leading-7 text-slate-600">
+              CPM, CPC, CTR, and engagement rate help creators and brands translate audience
+              attention into campaign cost. A TikTok creator with strong engagement can justify
+              higher rates, while a brand running paid social can compare influencer content against
+              ads manager results.
+            </p>
             <h3 className="mt-6 text-xl font-bold tracking-normal">Creator finance basics</h3>
             <p className="mt-3 leading-7 text-slate-600">
               The creator economy rewards momentum, but a creator business survives on cash flow.
@@ -365,7 +295,7 @@ export function CreatorToolsHome() {
               views.
             </p>
           </div>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
             {audienceCards.map(([title, body]) => (
               <article key={title} className="rounded-lg border border-slate-200 bg-slate-50 p-5">
                 <h3 className="font-bold tracking-normal">{title}</h3>
@@ -403,20 +333,11 @@ export function CreatorToolsHome() {
           </div>
           <FooterColumn
             title="Tools"
-            links={[
-              ["TikTok Money Calculator", "/tools/tiktok-money-calculator"],
-              ["TikTok Shop ROI Calculator", "/tools/tiktok-shop-roi-calculator"],
-              ["UGC Calculator", "/tools/ugc-rate-calculator"],
-              ["YouTube Revenue Calculator", "/tools/youtube-revenue-calculator"]
-            ]}
+            links={liveCreatorTools.map((tool) => [tool.shortTitle, tool.href])}
           />
           <FooterColumn
             title="Categories"
-            links={[
-              ["TikTok Tools", "#tiktok-tools"],
-              ["UGC Pricing", "#ugc-pricing"],
-              ["Creator Finance", "#creator-finance"]
-            ]}
+            links={toolCategories.map((category) => [category.title, `#${category.id}`])}
           />
           <FooterColumn
             title="Company"
@@ -432,7 +353,7 @@ export function CreatorToolsHome() {
   );
 }
 
-function ToolCard({ tool }: { tool: Tool }) {
+function ToolCard({ tool }: { tool: CreatorTool }) {
   const isLive = tool.status === "Live";
 
   return (

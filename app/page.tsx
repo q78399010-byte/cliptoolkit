@@ -6,9 +6,9 @@ import { createFaqSchema } from "@/lib/seo/schema";
 
 const canonicalUrl = "https://www.cliptoolkit.com";
 const ogImageUrl = "https://www.cliptoolkit.com/og/homepage.svg";
-const pageTitle = "ClipToolkit  Free Creator Business Tools for TikTok, YouTube & UGC";
+const pageTitle = "ClipToolkit  Free Creator Business Tools for TikTok, YouTube, UGC & Influencers";
 const pageDescription =
-  "Free creator business tools for TikTok creators, UGC creators, YouTubers, and creator agencies. Estimate earnings, price sponsorships, calculate UGC rates, and grow your creator business.";
+  "Free creator business tools for TikTok creators, UGC creators, YouTubers, influencer marketers, and creator agencies. Estimate earnings, engagement, CPM, CPC, rates, and ROI.";
 
 export const dynamic = "force-static";
 
@@ -20,6 +20,10 @@ export const metadata: Metadata = {
     "tiktok money calculator",
     "ugc rate calculator",
     "youtube revenue calculator",
+    "tiktok engagement rate calculator",
+    "tiktok cpm calculator",
+    "tiktok cpc calculator",
+    "influencer rate calculator",
     "creator business tools",
     "creator income calculator"
   ],

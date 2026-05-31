@@ -1,16 +1,13 @@
 import type { MetadataRoute } from "next";
+import { sitemapToolRoutes } from "@/data/creator-tools";
 import { listBlogPostsForSeo, listMarketingPagesForSeo } from "@/lib/seo/content";
 import { getSiteUrl, normalizePath } from "@/lib/seo/site";
 
 const toolRoutes = [
-  "/tools/tiktok-money-calculator",
-  "/tools/tiktok-shop-roi-calculator",
+  ...sitemapToolRoutes,
   "/tools/tiktok-shop-roi-calculator/usd",
   "/tools/tiktok-shop-roi-calculator/gbp",
-  "/tools/tiktok-shop-roi-calculator/eur",
-  "/tools/ugc-rate-calculator",
-  "/tools/youtube-revenue-calculator",
-  "/tools/sponsorship-rate-calculator"
+  "/tools/tiktok-shop-roi-calculator/eur"
 ];
 const coreRoutes = ["/"];
 const supportRoutes = ["/faq", "/blog", "/privacy-policy", "/terms", "/dmca"];
