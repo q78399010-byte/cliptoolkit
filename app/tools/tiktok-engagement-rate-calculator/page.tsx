@@ -43,35 +43,51 @@ const faqItems = [
 
 const contentBlocks: ContentBlock[] = [
   {
-    title: "What is a TikTok Engagement Rate Calculator?",
+    title: "What this calculator does",
     paragraphs: [
-      "A TikTok Engagement Rate Calculator turns likes, comments, shares, saves, views, and followers into clear engagement percentages. It helps creators understand whether a video only reached people or actually made them respond.",
-      "For brands and agencies, engagement rate is a quick way to compare creators beyond follower count. A smaller creator with active comments, saves, and shares may be more useful than a larger account with passive reach."
+      "This TikTok Engagement Rate Calculator turns the public signals on a TikTok post into a cleaner performance snapshot. Instead of looking at likes alone, it adds likes, comments, shares, and saves, then compares that total with either video views or follower count. The result is a view-based engagement rate, a follower-based engagement rate, total engagements, share and save rate, comment rate, and a simple quality label that helps you read the numbers faster.",
+      "The calculator is useful when you want to understand whether a post created active response, not just reach. A video can collect a large number of views because the algorithm tested it with a broad audience, but that does not always mean viewers cared enough to comment, save, or share. For creators, the estimate can support media kits and content reviews. For brands and agencies, it gives a practical way to compare creators beyond follower count and spot posts with stronger audience intent."
     ]
   },
   {
-    title: "TikTok engagement rate formula",
+    title: "How to use it",
     paragraphs: [
-      "The most practical single-video formula divides total engagements by views. Account-level reporting can also divide total engagements by followers, especially when comparing creators in the same niche."
+      "Start with one TikTok video or a consistent set of similar videos. Enter the views, followers, likes, comments, shares, and saves from the same reporting window. If you are auditing one post, use the metrics shown for that post. If you are comparing a creator over time, use averages from recent videos in the same format, such as product demos, tutorials, reviews, or talking-head posts.",
+      "Read the view-based engagement rate first when judging a specific video because it compares responses with the people who actually saw the post. Use the follower-based rate when you need an account-level signal for a media kit or creator comparison. Then look below the headline number. A post with many likes but few saves or shares may be entertaining but not very useful. A post with modest views and strong saves can be valuable for education, shopping research, or B2B content."
+    ]
+  },
+  {
+    title: "Formula explanation",
+    paragraphs: [
+      "The main formula adds the engagement actions that usually show up on a public TikTok post: likes, comments, shares, and saves. That total is divided by views to calculate engagement rate by views. The same engagement total is also divided by followers to calculate engagement rate by followers. Both numbers are percentages, so the calculator multiplies the ratio by 100.",
+      "The two denominators answer different questions. Views ask, \"Of the people who saw this video, how many acted?\" Followers ask, \"How much response did this post create compared with the creator's owned audience?\" On TikTok, the view-based rate is often more useful for single videos because posts can reach many non-followers. The follower-based rate is still helpful for account reporting, especially when every creator is being measured with the same method."
     ],
     formula: "Engagement rate = (likes + comments + shares + saves) / views x 100"
   },
   {
-    title: "What affects TikTok engagement rate?",
+    title: "Example calculation",
     paragraphs: [
-      "Engagement changes by content format, hook strength, audience fit, niche, viewer intent, posting time, and whether the video gives people a reason to respond. A tutorial may earn more saves, while a discussion post may earn more comments."
+      "Imagine a TikTok video has 50,000 views, 12,000 followers on the account, 3,200 likes, 180 comments, 240 shares, and 420 saves. Total engagements are 3,200 + 180 + 240 + 420, which equals 4,040. The view-based engagement rate is 4,040 divided by 50,000, then multiplied by 100, for an estimated 8.08%. The follower-based engagement rate is 4,040 divided by 12,000, then multiplied by 100, for about 33.67%.",
+      "Those two numbers tell different stories. The 8.08% view-based rate says the post created strong response from the people it reached. The higher follower-based rate says the post performed well relative to the creator's follower base, but it may also show that TikTok pushed the video beyond followers. The share and save rate is 660 divided by 50,000, or 1.32%, which is useful if the goal is word of mouth, reference value, or creator content that a brand may want to reuse."
+    ]
+  },
+  {
+    title: "Common mistakes to avoid",
+    paragraphs: [
+      "The biggest mistake is treating one engagement rate as a universal grade. A comedy post, a product review, a finance explainer, and a beauty tutorial can all earn engagement in different ways. Compare posts within the same niche, format, and audience size before calling a result good or bad.",
+      "Another mistake is using mismatched data. Views, followers, likes, comments, shares, and saves should come from the same post or the same group of posts. Do not combine one viral video's views with another post's engagement count. Also avoid judging a campaign only by likes. Comments, shares, and saves often show stronger intent, and they can matter more when a brand cares about trust, education, or purchase consideration."
     ],
     cards: [
-      ["Hook clarity", "Viewers need to understand the promise of the video immediately."],
-      ["Audience fit", "Engagement is stronger when the topic matches why people followed or watched."],
-      ["Save value", "Checklists, examples, scripts, and frameworks often increase saves."],
-      ["Comment prompt", "Specific prompts usually perform better than broad questions."]
+      ["Counting likes only", "Likes are easy to earn. Include comments, shares, and saves for a fuller view of audience response."],
+      ["Mixing time windows", "Use metrics from the same post, campaign period, or recent average set."],
+      ["Ignoring format", "Compare tutorials with tutorials, reviews with reviews, and entertainment posts with similar posts."],
+      ["Overpricing one spike", "Use engagement rate with average views, audience fit, usage rights, and deliverable scope."]
     ]
   },
   {
     title: "Engagement signals to compare",
     paragraphs: [
-      "Do not treat every engagement as equal. Likes are easy, comments require more effort, and saves or shares can show stronger usefulness or entertainment value."
+      "Do not treat every engagement as equal. Likes are useful, but comments require more effort, shares show social value, and saves often mean the viewer wants to return later. When a post is being used to price an influencer campaign, these differences matter because they describe the kind of attention the creator is creating."
     ],
     table: {
       headers: ["Signal", "What it suggests", "How to improve it"],

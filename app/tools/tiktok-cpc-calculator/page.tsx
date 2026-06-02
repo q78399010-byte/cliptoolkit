@@ -43,23 +43,51 @@ const faqItems = [
 
 const contentBlocks: ContentBlock[] = [
   {
-    title: "What is a TikTok CPC Calculator?",
+    title: "What this calculator does",
     paragraphs: [
-      "A TikTok CPC Calculator shows the average cost of each click from a campaign. It helps advertisers understand whether creative, audience, and offer choices are creating affordable traffic.",
-      "CPC is especially useful when testing hooks, calls to action, landing pages, product pages, TikTok Shop offers, or creator ads where clicks are the next step after attention."
+      "This TikTok CPC Calculator shows the average cost of each click from a TikTok campaign. It uses ad spend and clicks to calculate CPC, then uses impressions to estimate CTR and click density. The calculator also shows cost per 100 clicks, a CPC band, and a click forecast based on a planned budget and target CPC.",
+      "The calculator is designed for traffic and offer testing. It helps advertisers, TikTok Shop sellers, creator agencies, and influencer marketers understand whether a video is turning reach into affordable clicks. CPC does not tell you whether those clicks became customers, but it does show how expensive the next step was after the impression. That makes it useful when testing hooks, calls to action, landing pages, product pages, Spark Ads, and creator-style ads."
     ]
   },
   {
-    title: "TikTok CPC formula",
+    title: "How to use it",
     paragraphs: [
-      "The CPC formula divides total ad spend by total clicks. Add impressions to calculate CTR and understand whether the campaign is earning clicks from the reach it receives."
+      "Enter ad spend, clicks, and impressions from the same campaign, ad group, creative, or reporting window. Decide which click type you are measuring before you start. TikTok reports can include link clicks, destination clicks, product clicks, profile clicks, and other actions depending on setup. The calculator will work with any click count, but your comparisons only make sense when the click definition stays consistent.",
+      "Use the planned budget and target CPC fields to estimate future traffic. If you want to know how many clicks a $1,000 test might generate at a $0.65 CPC, the forecast gives you a planning number and a range. After you calculate CPC, read it with CTR. CPC tells you what each click cost. CTR tells you whether the creative turned impressions into clicks at a healthy rate. Together, they make it easier to separate traffic cost from creative response."
+    ]
+  },
+  {
+    title: "Formula explanation",
+    paragraphs: [
+      "The CPC formula is straightforward: divide total ad spend by total clicks. If a campaign spent $500 and generated 850 clicks, each click cost a little under sixty cents. CPC is a cost metric, so lower usually looks better, but lower is not automatically stronger. Cheap traffic can still be a poor result if the audience does not buy, sign up, watch the next step, or match the brand's target customer.",
+      "The calculator also uses impressions to calculate CTR, or click-through rate. CTR is clicks divided by impressions, multiplied by 100. It answers a different question: out of all impressions, what percentage became clicks? The forecast uses planned budget divided by target CPC. Cost per 100 clicks multiplies CPC by 100, which can be useful when presenting traffic cost to a client or comparing several creatives in a simple table."
     ],
     formula: "CPC = ad spend / clicks"
   },
   {
+    title: "Example calculation",
+    paragraphs: [
+      "Imagine a TikTok campaign spent $500, generated 850 clicks, and delivered 75,000 impressions. CPC is $500 divided by 850, which equals about $0.59. CTR is 850 divided by 75,000, multiplied by 100, which equals about 1.13%. Click density is 850 divided by 75,000, multiplied by 1,000, or roughly 11 clicks per 1,000 impressions. The cost per 100 clicks is about $58.82.",
+      "For a future test, suppose the planned budget is $1,000 and the target CPC is $0.65. The forecast is $1,000 divided by $0.65, or about 1,538 clicks. The actual result can be lower or higher because TikTok delivery changes with auction pressure, audience quality, creative fatigue, bid strategy, and landing page relevance. The forecast is still useful because it tells you whether the budget is large enough to generate a meaningful click sample."
+    ]
+  },
+  {
+    title: "Common mistakes to avoid",
+    paragraphs: [
+      "The most common mistake is celebrating low CPC without checking what happened after the click. If users bounce from the landing page, ignore the product page, or fail to convert, a cheap click can still waste budget. CPC should be reviewed with conversion rate, CPA, average order value, and ROAS before you decide to scale a campaign.",
+      "Another mistake is mixing click definitions. One report may use link clicks, another may use destination clicks, and a third may include profile or product clicks. Those numbers can look similar but represent different user actions. Keep the click type consistent, match spend and clicks to the same date range, and compare creatives within the same objective when possible."
+    ],
+    cards: [
+      ["Wrong click type", "Choose one click definition and use it across every comparison."],
+      ["Cheap but weak", "Low CPC is not useful when conversion rate or lead quality is poor."],
+      ["Missing CTR", "CPC needs CTR to show whether the creative is earning clicks from reach."],
+      ["Uneven windows", "Use spend, clicks, and impressions from the same reporting period."]
+    ]
+  },
+  {
     title: "How to read CPC with CTR",
     paragraphs: [
-      "CPC tells you the cost of each click. CTR tells you how often impressions become clicks. A campaign can have a low CPC because traffic is cheap, or because the ad is reaching a broad audience that may not buy."
+      "CPC tells you the cost of each click. CTR tells you how often impressions become clicks. A campaign can have a low CPC because the ad is efficient, or because it is reaching a broad audience where clicks are inexpensive but not necessarily valuable."
     ],
     cards: [
       ["High CTR, low CPC", "The creative and offer are likely earning attention efficiently."],

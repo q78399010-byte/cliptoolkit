@@ -43,23 +43,51 @@ const faqItems = [
 
 const contentBlocks: ContentBlock[] = [
   {
-    title: "What is a TikTok CPM Calculator?",
+    title: "What this calculator does",
     paragraphs: [
-      "A TikTok CPM Calculator shows how much you paid for every 1,000 impressions. It is useful for media buyers, creators, and agencies that need a fast way to compare reach costs across campaigns.",
-      "CPM is not a complete performance metric, but it is a useful starting point. It helps you understand whether the campaign is buying attention efficiently before you review clicks, conversions, and sales."
+      "This TikTok CPM Calculator shows how much a campaign paid for every 1,000 impressions. It converts ad spend and delivered impressions into a CPM, then adds supporting outputs such as cost per 10,000 impressions, impressions per dollar, a CPM band, and a forecast for a planned budget at a target CPM. The goal is to make reach cost easier to read before you move into deeper performance metrics.",
+      "CPM is most useful when the question is about attention and delivery. It helps media buyers compare campaigns, creators compare organic reach against paid reach, and agencies explain whether a TikTok campaign is buying impressions efficiently. CPM does not prove that the traffic was qualified or profitable, but it gives you a clean starting point for understanding media cost before you review CPC, CTR, conversion rate, ROAS, and audience quality."
     ]
   },
   {
-    title: "TikTok CPM formula",
+    title: "How to use it",
     paragraphs: [
-      "The CPM formula divides total ad spend by total impressions, then multiplies by 1,000. Use the same currency for spend and budget inputs so the estimate stays consistent."
+      "Enter the ad spend and impressions from the same TikTok Ads Manager report, campaign, ad group, or date range. If the campaign spent $500 between Monday and Sunday, use the impressions delivered during that same Monday-to-Sunday window. Mixing a lifetime spend number with a seven-day impression number will make the CPM look better or worse than it really is.",
+      "Use the planned budget and target CPM fields when you want a simple reach forecast. For example, if you are preparing the next creative test and you expect an $8 CPM, the calculator can estimate how many impressions a $1,000 test may buy. Treat the forecast as a planning range, not a promise. Auction competition, creative fatigue, audience size, bid strategy, seasonality, and campaign objective can all move the final CPM."
+    ]
+  },
+  {
+    title: "Formula explanation",
+    paragraphs: [
+      "The CPM formula divides total ad spend by total impressions, then multiplies by 1,000. Multiplying by 1,000 makes the number easier to compare because impressions are usually delivered in large volumes. A $6.67 CPM means the campaign paid about $6.67 for each block of 1,000 impressions, not for each individual view or click.",
+      "The calculator also shows cost per 10,000 impressions by multiplying CPM by 10, impressions per dollar by dividing impressions by spend, and forecast impressions by dividing planned budget by target CPM, then multiplying by 1,000. These extra outputs are still based on the same delivery logic. They simply translate CPM into numbers that are easier for campaign planning, client reporting, and creator media value comparisons."
     ],
     formula: "CPM = ad spend / impressions x 1,000"
   },
   {
+    title: "Example calculation",
+    paragraphs: [
+      "Suppose a TikTok campaign spent $500 and delivered 75,000 impressions. The CPM is $500 divided by 75,000, multiplied by 1,000, which equals $6.67. The cost per 10,000 impressions is about $66.67, and the campaign delivered 150 impressions for every dollar spent. Those numbers suggest the campaign bought reach at a workable price, but they still need to be checked against clicks and conversions.",
+      "Now imagine the next test has a planned budget of $1,000 and a target CPM of $8. The forecast is $1,000 divided by $8, multiplied by 1,000, which equals 125,000 impressions. The calculator displays a low and high range around that estimate because real delivery can move. If the final CPM comes in lower than $8, the budget may buy more impressions. If competition rises or the audience is narrow, the same budget may buy less."
+    ]
+  },
+  {
+    title: "Common mistakes to avoid",
+    paragraphs: [
+      "A common mistake is judging CPM by itself. A cheap CPM can be good for awareness, but it can also hide low click intent, poor landing page fit, or an audience that never converts. A higher CPM can still be acceptable when the audience is valuable, the creative earns strong clicks, or the campaign supports a high-margin product.",
+      "Another mistake is comparing CPM across campaigns with different objectives. A reach campaign, conversion campaign, Spark Ad test, retargeting ad group, and narrow high-intent audience may all produce different CPMs for valid reasons. Keep the campaign objective, audience size, bid strategy, date range, and placement mix visible when you compare results. CPM becomes more useful when the context stays attached to the number."
+    ],
+    cards: [
+      ["Mixing metrics", "Spend and impressions must come from the same campaign window."],
+      ["Ignoring objective", "Reach, traffic, and conversion campaigns can have different auction costs."],
+      ["Chasing cheap reach", "Low CPM matters less when clicks, watch time, or conversions are weak."],
+      ["Missing fatigue", "Rising CPM can signal stale creative, audience saturation, or heavier competition."]
+    ]
+  },
+  {
     title: "When CPM is useful",
     paragraphs: [
-      "CPM is most useful when the campaign goal is awareness, reach, creator content testing, or comparing TikTok ads with influencer media value. It is less useful by itself when the goal is profitable sales."
+      "CPM is most useful when the campaign goal is awareness, reach, creator content testing, or comparing TikTok ads with influencer media value. It is less useful by itself when the goal is profitable sales, but it still helps explain whether the campaign had enough affordable delivery to generate a fair test."
     ],
     cards: [
       ["Reach planning", "Forecast how many impressions a budget can buy at a target CPM."],
