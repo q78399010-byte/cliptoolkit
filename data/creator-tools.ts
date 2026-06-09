@@ -222,6 +222,94 @@ export const creatorTools: CreatorTool[] = [
     sitemap: true
   },
   {
+    title: "YouTube CPM Calculator",
+    shortTitle: "YouTube CPM",
+    description: "Calculate cost per 1,000 impressions",
+    href: "/tools/youtube-cpm-calculator",
+    slug: "youtube-cpm-calculator",
+    category: "YouTube Tools",
+    categoryId: "youtube-tools",
+    status: "Live",
+    cta: "Try Calculator",
+    pageTitle: "YouTube CPM Calculator (2026) | Calculate Cost Per 1,000 Impressions",
+    metaDescription:
+      "Free YouTube CPM Calculator. Calculate YouTube CPM from ad spend and impressions, then forecast reach from a planned video ad budget.",
+    keywords: [
+      "youtube cpm calculator",
+      "youtube ads cpm calculator",
+      "youtube cost per thousand impressions",
+      "youtube ad cost calculator"
+    ],
+    ogImage: "/og/youtube-cpm-calculator.svg",
+    sitemap: true
+  },
+  {
+    title: "YouTube Engagement Rate Calculator",
+    shortTitle: "YouTube Engagement",
+    description: "Calculate YouTube audience response",
+    href: "/tools/youtube-engagement-rate-calculator",
+    slug: "youtube-engagement-rate-calculator",
+    category: "YouTube Tools",
+    categoryId: "youtube-tools",
+    status: "Live",
+    cta: "Try Calculator",
+    pageTitle: "YouTube Engagement Rate Calculator (2026) | Free ER Tool",
+    metaDescription:
+      "Free YouTube Engagement Rate Calculator. Calculate engagement rate by views and subscribers using likes, comments, shares, views, and subscribers.",
+    keywords: [
+      "youtube engagement rate calculator",
+      "youtube engagement calculator",
+      "youtube er calculator",
+      "youtube like comment rate calculator"
+    ],
+    ogImage: "/og/youtube-engagement-rate-calculator.svg",
+    sitemap: true
+  },
+  {
+    title: "YouTube Shorts Money Calculator",
+    shortTitle: "Shorts Money",
+    description: "Estimate Shorts creator earnings",
+    href: "/tools/youtube-shorts-money-calculator",
+    slug: "youtube-shorts-money-calculator",
+    category: "YouTube Tools",
+    categoryId: "youtube-tools",
+    status: "Live",
+    cta: "Try Calculator",
+    pageTitle: "YouTube Shorts Money Calculator (2026) | Estimate Shorts Earnings",
+    metaDescription:
+      "Free YouTube Shorts Money Calculator. Estimate Shorts revenue from views, Shorts RPM, long-form lift, and extra creator monetization.",
+    keywords: [
+      "youtube shorts money calculator",
+      "youtube shorts earnings calculator",
+      "shorts revenue calculator",
+      "youtube shorts rpm calculator"
+    ],
+    ogImage: "/og/youtube-shorts-money-calculator.svg",
+    sitemap: true
+  },
+  {
+    title: "YouTube Subscriber Growth Calculator",
+    shortTitle: "Subscriber Growth",
+    description: "Forecast channel subscriber growth",
+    href: "/tools/youtube-subscriber-growth-calculator",
+    slug: "youtube-subscriber-growth-calculator",
+    category: "YouTube Tools",
+    categoryId: "youtube-tools",
+    status: "Live",
+    cta: "Try Calculator",
+    pageTitle: "YouTube Subscriber Growth Calculator (2026) | Forecast Channel Growth",
+    metaDescription:
+      "Free YouTube Subscriber Growth Calculator. Forecast new subscribers from monthly views, subscriber conversion rate, upload cadence, and growth targets.",
+    keywords: [
+      "youtube subscriber growth calculator",
+      "youtube subscriber calculator",
+      "youtube growth calculator",
+      "youtube channel growth calculator"
+    ],
+    ogImage: "/og/youtube-subscriber-growth-calculator.svg",
+    sitemap: true
+  },
+  {
     title: "Sponsorship Rate Calculator",
     shortTitle: "Sponsorship Rates",
     description: "Estimate brand deal pricing",
